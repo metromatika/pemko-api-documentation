@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .no-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  .menu {
+    @apply flex items-center gap-3 px-3 py-2 mx-5 rounded-lg hover:bg-font/20;
+  }
+
+  .truncate-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .input-base {
+    @apply w-full rounded-lg bg-transparent text-sm text-font outline-none placeholder:text-slate-400 xl:text-[15px];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  /* Track */
+  .custom-scrollbar::-webkit-scrollbar-track {
+    box-shadow: none;
+  }
+
+  /* Handle */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    /* background: #059669; */
+    background: rgba(5, 150, 105, 0.5);
+    border-radius: 30px;
+  }
+
+  /* Handle on hover */
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #047857;
+  }
+
+  /* @media (max-width: 480px) {
+    .custom-scrollbar,
+    .custom-scrollbar code {
+      white-space: pre-wrap !important;
+      overflow-wrap: break-word !important;
+    }
+  } */
+
+  pre {
+    max-height: 280px;
+  }
+
+  pre code {
+    @apply text-xs xl:text-sm !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}

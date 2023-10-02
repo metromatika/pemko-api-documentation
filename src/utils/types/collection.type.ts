@@ -1,0 +1,98 @@
+interface BearerTokenType {
+  key: string
+  value: string
+  type: string
+}
+
+interface FormdataItemType {
+  key: string
+  value: string
+  type: string
+  src?: string
+}
+
+interface QueryType {
+  key: string
+  value: string
+}
+
+interface AuthType {
+  type: string
+  bearer: BearerTokenType[]
+}
+
+interface UrlType {
+  raw: string
+  host: string[]
+  path: string[]
+  query?: QueryType[]
+}
+
+export interface HeaderType {
+  key: string
+  value: string
+  type: string | null
+}
+
+export interface BodyType {
+  mode: string
+  formdata: FormdataItemType[] | null
+  raw: string | null
+}
+
+export interface ResponseType {
+  name: string
+  originalRequest: {
+    method: string
+    header: HeaderType[]
+    body: BodyType
+    url: UrlType
+  }
+  status: string
+  code: number
+  _postman_previewlanguage: string
+  header: HeaderType[]
+  cookie: string[]
+  body: string
+}
+
+export interface RequestType {
+  auth: AuthType | null
+  method: string
+  header: HeaderType[] | null
+  body: BodyType
+  url: UrlType
+  description: string
+}
+
+export interface ItemType {
+  name: string
+  item: ItemType[] | null
+  request: Request | null
+  response: ResponseType[] | null
+  description: string | null
+}
+
+interface InfoType {
+  _postman_id: string
+  name: string
+  description?: string
+}
+
+export interface PostmanCollection {
+  info: InfoType
+  item: ItemType[]
+}
+
+export interface CollectionType {
+  id: string
+  user_id: string
+  title: string
+  access_type: string
+  json_file: PostmanCollection
+}
+
+export interface CollectionResponseType {
+  message: string
+  data: CollectionType[]
+}

@@ -1,0 +1,2983 @@
+{
+	"info": {
+		"_postman_id": "bb3c6eff-9d18-4aba-a273-c7c81fbe612b",
+		"name": "TAMARA Copy",
+		"description": "Dokumentasi Restfull API untuk Client atau Aplikasi TAMARA. API masih dalam ***lingkungan pengembangan***, harap ***tidak melakukan request*** pada API ini dan ***tidak menekan tombol \"Run in Postman\"***, karena Anda hanya akan mendapatkan pesan error jika mencobanya, sebagai simulasi Anda bisa melihat request body, response, header, dan ketentuan lainnya pada setiap endpoint yang tersedia berdasarkan tiap-tiap dokumentasinya.\n\n### BASE URL: `https://tamara-api-6jw5kieabq-et.a.run.app`\n\n> ***Dokumentasi bersifat rahasia, tolong jangan disebar luaskan!!!***",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27401477"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "#### Request Body\n\n*   `fullname` as `string` ***(required)***\n*   `email` as `string`, must be unique ***(required)***\n*   `password` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-lyc8SejFtW5Yg8bHM14ZkLV/kAw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account has been successfully created\"\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-2DLSLK8mweosWO6rah7gZUvDgWM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:06:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"\\\"password\\\" is required\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const accessToken = pm.response.json().accessToken;\r",
+									"\r",
+									"pm.environment.set(\"accessToken\", accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{budiEmail}}\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "#### Request Body\n\n*   `email` as `string` ***(required)***\n*   `password` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "327"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"147-aw7SgOgUpIF6P+J0ecsfioFrlSI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:40:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Budi Sanjaya has been login successfully\",\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzOTJkMzc0LTNkYTktNDhhYi1hNDBjLWI4ZGI2M2Q0NTY3YSIsImZ1bGxuYW1lIjoiQnVkaSBTYW5qYXlhIiwiZW1haWwiOiJidWRpc2FuamF5YUBnbWFpbC5jb20iLCJwaG90byI6IiIsImlhdCI6MTY4NDI0NDQzMX0.9r5O99UpQ5lCcPpB3X4j0xrqHCCRK8EG8Xg1HZDHIRU\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan aktivitas authentication dan sebagai landasan authorization pada server terhadap client, endpoint-endpoint ini diperlukan untuk dilewati pengguna agar client dapat menggunakan layanan lain dari server yang membutuhkan pengguna untuk login.\n\n> ***Endpoint ini bisa dipakai oleh user yang belum login***"
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Get User Data Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-uRddfk3au/1mh93kCX4msRaL7Ow\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:45:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get user data\",\n    \"data\": {\n        \"id\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\",\n        \"fullname\": \"Budi Sanjaya\",\n        \"email\": \"budisanjaya@gmail.com\",\n        \"photo\": \"\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Data Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullname",
+									"value": "{{fullname}}",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/D:/dummy-image/profile/vansius.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "#### Request Body\n\n*   `fullname` as `string` ***(required)***\n*   `photo` as `file`, must be a valid image file, max size 1MB ***(optional)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fullname",
+											"value": "{{fullname}}",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/D:/dummy-image/HIMATIF-WEB/profile/profile.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-aNc7hKjGHEfWbORSibsMKxAJkcY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:46:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to change user data\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan perubahan dan pengambilan informasi terkait user yang login pada client dan ter-autorisasi pada server.\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "DISCUSSION",
+			"item": [
+				{
+					"name": "test",
+					"item": [
+						{
+							"name": "Create New Discussion Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Padi",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/D:/dummy-image/TAMARA/padi.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/questions",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									]
+								},
+								"description": "#### Request Body\n\n*   `question` as `string` ***(required)***\n*   `description` as `string` ***(required)***\n*   `category` as `string` ***(required)***\n*   `picture` as `file`, must be a valid image file, max size 1MB ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "question",
+													"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+													"type": "text"
+												},
+												{
+													"key": "category",
+													"value": "Padi",
+													"type": "text"
+												},
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/D:/dummy-image/TAMARA/plant-6.jpg"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{URL}}/questions",
+											"host": [
+												"{{URL}}"
+											],
+											"path": [
+												"questions"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "44"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2c-ADXoAiFElv28oHQYLyhApu2WpCc\""
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 16 May 2023 13:51:25 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Success to create new question\"\n}"
+								}
+							]
+						}
+					],
+					"description": "#### Deskripsi\n\nEndpoint ini berguna untuk mencari seluruh daerah yang terdaftar di database berdasarkan ***keyword*** yang diberikan pengguna. Endpoint ini mungkin berguna untuk fitur pencarian cuaca pada daerah lain, dimana nantinya client akan menampilkan seluruh list daerah yang sesuai dengan ***keyword*** yang dimasukkan, lalu memberikan *id* atau ***lat*** dan ***lon*** ke server untuk memberikan detail dari daerah yang ia ***klik*** atau ***tekan.***\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+				},
+				{
+					"name": "Create New Discussion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "question",
+									"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Padi",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/dummy-image/TAMARA/padi.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/questions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "#### Request Body\n\n*   `question` as `string` ***(required)***\n*   `description` as `string` ***(required)***\n*   `category` as `string` ***(required)***\n*   `picture` as `file`, must be a valid image file, max size 1MB ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Padi",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/D:/dummy-image/TAMARA/plant-6.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/questions",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-ADXoAiFElv28oHQYLyhApu2WpCc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:51:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to create new question\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Discussions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"316-nc9+CK8hxtEBTBolbtNZ/NKRRQk\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "ad5f737b91f16cc0272c84d48d60d36e"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:46:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "790"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get all questions\",\n    \"data\": [\n        {\n            \"_id\": \"64805207ad1b1ec16330f752\",\n            \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n            \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n            \"category\": \"Padi\",\n            \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n            \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"64805207ad1b1ec16330f752\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Questions By Keyword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions?search=panas",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "panas"
+								}
+							]
+						},
+						"description": "Pada endpoint ini, client dapat mencari diskusi berdasarkan ***keyword*** yang dapat dicari dari ***question***, ***category***, dan, ***description***.\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions?search=panas",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "panas"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"325-X+2+UxUYWaRvQFF6LPqSmL4M2NE\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "110b0230053789a3dbf53313c2a84170;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:47:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "805"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get questions with keyword panas\",\n    \"data\": [\n        {\n            \"_id\": \"64805207ad1b1ec16330f752\",\n            \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n            \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n            \"category\": \"Padi\",\n            \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n            \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"64805207ad1b1ec16330f752\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Question By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"330-5lWiAJfhqULm/tPt+LqfWGAAmeQ\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "84dfca8d80fadee26d3682f12650c910;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:48:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "816"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get question with ID 64805207ad1b1ec16330f752\",\n    \"data\": {\n        \"_id\": \"64805207ad1b1ec16330f752\",\n        \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n        \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n        \"category\": \"Padi\",\n        \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n        \"userId\": \"64803e12b23077260d526891\",\n        \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n        \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n        \"__v\": 0,\n        \"user\": {\n            \"_id\": \"64803e12b23077260d526891\",\n            \"fullname\": \"Budi Sanjaya\",\n            \"email\": \"budisanjaya@gmail.com\",\n            \"photo\": \"\"\n        },\n        \"id\": \"64805207ad1b1ec16330f752\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "question",
+									"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas Updated?",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman Updated?",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Bunga",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"description": "Optional",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Request Body\n\n*   `question` as `string` ***(required)***\n*   `description` as `string` ***(required)***\n*   `category` as `string` ***(required)***\n*   `picture` as `file`, must be a valid image file, max size 1MB ***(optional)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Update Question",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas Updated?",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman Updated?",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Bunga",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"description": "Optional",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-MRM0/6IV5hMZ/TwqNf6Fq7Anirc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:00:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to update question\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Delete Question",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-/IdruE7rDtWg+D22RDVgaxX/vhM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:58:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to delete question\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint yang berfungsi untuk ***create, read, update dan delete*** diskusi atau pertanyaan oleh user yang login pada fitur komunitas.\n\n> ***Endpoint pada folder ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ANSWER",
+			"item": [
+				{
+					"name": "Create New Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers"
+							]
+						},
+						"description": "#### Request Body\n\n*   `description` as `string` ***(required)***\n*   `questionId` as `string`, must be a valid id ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-yPW8G5DoW19rFj/GdfY0xP07C3c\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:02:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to create new answer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Answers By Question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers/question/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"question",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Request Body\n\n*   `questionid` as `string`, must be a valid id ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "895"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37f-wMCFl23RCc2nIUzUlgPzDA+3eCw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:52:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get answers from question with ID: 64805207ad1b1ec16330f752\",\n    \"data\": [\n        {\n            \"_id\": \"648052a1ad1b1ec16330f75d\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"questionId\": \"64805207ad1b1ec16330f752\",\n            \"createdAt\": \"2023-06-07T09:49:21.146Z\",\n            \"updatedAt\": \"2023-06-07T09:49:21.146Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"648052a1ad1b1ec16330f75d\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Answer By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "878"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36e-ZuTgcf5nOY5f8zTGqx7FxVYWk28\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:53:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get answer with ID: 648052a1ad1b1ec16330f75d\",\n    \"data\": {\n        \"_id\": \"648052a1ad1b1ec16330f75d\",\n        \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n        \"userId\": \"64803e12b23077260d526891\",\n        \"questionId\": \"64805207ad1b1ec16330f752\",\n        \"createdAt\": \"2023-06-07T09:49:21.146Z\",\n        \"updatedAt\": \"2023-06-07T09:49:21.146Z\",\n        \"__v\": 0,\n        \"user\": {\n            \"_id\": \"64803e12b23077260d526891\",\n            \"fullname\": \"Budi Sanjaya\",\n            \"email\": \"budisanjaya@gmail.com\",\n            \"photo\": \"\"\n        },\n        \"id\": \"648052a1ad1b1ec16330f75d\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Request Body\n\n*   `description` as `string` ***(required)***\n    \n\n#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-WkRQXkLV1N0ztu8aUurmfnvtSA4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:05:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to update answer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-5yqfkOdJkazMVmJvTJhWw9kOTkA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:05:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to delete answer\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan aktivitas CRUD (Create, Read, Update, dan Delete) pada data ***answer*** dari suatu ***question***, yang mana endpoint ini merupakan bagian dari fitur komunitas***.*** Syarat yang biasa diperlukan atau terhubung dalam menggunakan endpoint dalam folder ini ialah ***questionId*** dan ***userId.***\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PREDICTION",
+			"item": [
+				{
+					"name": "Get All Predict User Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "https://tamara-api-nq2iq4zfha-et.a.run.app/predict",
+							"protocol": "https",
+							"host": [
+								"tamara-api-nq2iq4zfha-et",
+								"a",
+								"run",
+								"app"
+							],
+							"path": [
+								"predict"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/predict",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1423"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"58f-YQJ23V03SmQ/U7OsteEuMrixkCg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jun 2023 13:10:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get your predict\",\n    \"data\": [\n        {\n            \"id\": \"e4c3ad9a-a532-4e56-82b0-b62143a1355c\",\n            \"recommendationId\": \"9347bf6c-b686-470d-a590-6e3d47674750\",\n            \"userId\": \"1fdda540-8c93-4bc0-853b-1f5a817bc9b9\",\n            \"Recommendation\": {\n                \"id\": \"9347bf6c-b686-470d-a590-6e3d47674750\",\n                \"fruit_name\": \"Mango\",\n                \"class\": \"Mango_sooty_mold_disease\",\n                \"recommendation\": \"Kami merekomendasikan penerapan kontrol organik pada tahap-tahap awal penyakit atau ketika tanaman mendekati panen. Pada stadium penyakit yang lebih lanjut, gunakan kontrol kimiawi. Mencapur atau memberikan produk-produk berbeda pada saat yang bersamaan tidak di rekomendasikan.\",\n                \"characteristics\": \"Daun menguning yang dimulai dari tepian, Pembuluh daun utama tetap bewarna hijau tua, Daun mengering, Pertumbuhan terhambat\",\n                \"images\": [\n                    {\n                        \"id\": \"325e89b1-df35-4538-8dd4-b9298c299073\",\n                        \"image\": \"https://storage.googleapis.com/tamara-bucket/5079083f-2187-424e-b880-545b47504274-kurang-kalium-3.jpeg\",\n                        \"recommendationId\": \"9347bf6c-b686-470d-a590-6e3d47674750\"\n                    },\n                    {\n                        \"id\": \"77fe3881-7ed4-49d6-9ac8-09dab074f809\",\n                        \"image\": \"https://storage.googleapis.com/tamara-bucket/174483e0-3358-4105-8032-a6f59f1b1619-kurang-kalium-2.jpg\",\n                        \"recommendationId\": \"9347bf6c-b686-470d-a590-6e3d47674750\"\n                    },\n                    {\n                        \"id\": \"be418985-b7e8-4f8d-998e-149313585e12\",\n                        \"image\": \"https://storage.googleapis.com/tamara-bucket/3ccf341a-6cb7-4904-9f10-3e728823485e-kurang-kalium-1.jpg\",\n                        \"recommendationId\": \"9347bf6c-b686-470d-a590-6e3d47674750\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Predict Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "plant_name",
+									"value": "mango",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"description": "Required",
+									"type": "file",
+									"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/mangga-sakit.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/predict",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"predict"
+							]
+						},
+						"description": "#### Request Body\n\n*   `images` as `file` , must be a valid image file, max 1MB ***(required)***\n*   `fruit_name` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Predict Image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"description": "Required",
+											"type": "file",
+											"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/mangga-sakit.jpg"
+										},
+										{
+											"key": "fruit_name",
+											"value": "mango",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/predict",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "904"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"388-HFH+0w5lFfQ+Pq5mKZ+QjzWnxKc\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jun 2023 14:25:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to predict\",\n    \"data\": {\n        \"_id\": \"647deecddaee8800eb12421f\",\n        \"fruit_name\": \"Mango\",\n        \"class\": \"Mango_sooty_mold_disease\",\n        \"recommendation\": \"Kami merekomendasikan penerapan kontrol organik pada tahap-tahap awal penyakit atau ketika tanaman mendekati panen. Pada stadium penyakit yang lebih lanjut, gunakan kontrol kimiawi. Mencapur atau memberikan produk-produk berbeda pada saat yang bersamaan tidak di rekomendasikan.\",\n        \"characteristics\": \"Daun menguning yang dimulai dari tepian, Pembuluh daun utama tetap bewarna hijau tua, Daun mengering, Pertumbuhan terhambat\",\n        \"images\": [\n            \"https://storage.googleapis.com/tamara-bucket/c8596d9f-7ccb-4eab-bed6-f679c52ef7cf-kurang-kalium-1.jpg\",\n            \"https://storage.googleapis.com/tamara-bucket/15d0a1d0-ecd6-40af-b516-fe3433e13631-kurang-kalium-2.jpg\",\n            \"https://storage.googleapis.com/tamara-bucket/7f2d9eac-f5ac-4b04-a13d-9151db135a5c-kurang-kalium-3.jpeg\"\n        ],\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Predict Image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "plant_name",
+											"value": "mango",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"description": "Required",
+											"type": "file",
+											"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/healthy/mango.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/predict",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"806-83r6q3puDyosh/XdzwuzK0YYq8g\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "367cdb9c9b526e79853980886b8acfed;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jun 2023 07:48:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2054"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to predict\",\n    \"data\": {\n        \"_id\": \"6486cce164f3a2b0cff90413\",\n        \"tanaman\": \"mango\",\n        \"label\": \"Mango_healthy\",\n        \"penyakit\": \"healthy\",\n        \"hasil\": {\n            \"ciriDaunSehat\": [\n                \"Warna hijau cerah: Daun cabai yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi.\",\n                \"Tekstur yang keras: Daun cabai yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air.\",\n                \"Tidak ada hama atau penyakit: Daun cabai yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya.\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman cabai perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman.\",\n                \"Beri pupuk secara teratur: Tanaman cabai perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman cabai.\",\n                \"Berikan sinar matahari penuh: Tanaman cabai membutuhkan sinar matahari penuh untuk tumbuh subur. Jika mereka tidak mendapatkan cukup sinar matahari, mereka mungkin tidak akan menghasilkan banyak cabai atau cabai tidak akan terlalu panas.\",\n                \"Lindungi dari hama dan penyakit: Tanaman cabai rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu.\",\n                \"Beri mulsa di sekitar tanaman: Mulsa membantu menjaga kelembapan dan menekan gulma.\",\n                \"Pangkas tanaman: Pemangkasan membantu menjaga tanaman tetap sehat dan produktif.\",\n                \"Rotasi tanaman: Merotasi tanaman membantu mencegah penumpukan hama dan penyakit.\",\n                \"Dengan mengikuti tips-tips ini, Anda dapat membantu tanaman cabai Anda tumbuh subur dan menghasilkan panen yang melimpah.\"\n            ]\n        },\n        \"image\": \"https://storage.googleapis.com/tamara-storage/4a8f68b8-383f-4651-8098-aa3c5bab647a-mango.jpg\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint untuk melakukan aktivitas menjalankan model terhadap gambar tanaman yang dikirimkan oleh client pada server untuk mendapatkan hasil analisis dan rekomendasi dari gambar tanaman yang dikirimkan***.***\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PRODUCTION",
+			"item": [
+				{
+					"name": "Create Analysis Production",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"jenis_tanaman\": \"Padi\",\r\n  \"luas_lahan\": 500,\r\n  \"hasil_panen\": 500,\r\n  \"harga_pasaran\": 100000,\r\n  \"biaya\": {\r\n    \"sewa_lahan\": 0,\r\n    \"benih\": 1000000,\r\n    \"peralatan_pertanian\": 1000000,\r\n    \"pemupukan\": 500000,\r\n    \"obat_pertanian\": 500000,\r\n    \"transportasi\": 0,\r\n    \"kemasan_hasil_panen\": 0,\r\n    \"upah_kerja\": 0,\r\n    \"lain\": 0\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/analyze",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"analyze"
+							]
+						},
+						"description": "#### Request Body"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"jenis_tanaman\": \"Padi\",\r\n    \"luas_lahan\": 500,\r\n    \"hasil_panen\": 500,\r\n    \"harga_pasaran\": 100000,\r\n    \"biaya\": {\r\n      \"sewa_lahan\": 0,\r\n      \"benih\": 1000000,\r\n      \"peralatan_pertaninan\": 1000000,\r\n      \"pemupukan\": 500000,\r\n      \"obat_pertanian\": 500000,\r\n      \"transportasi\": 0,\r\n      \"kemasan_hasil_panen\": 0,\r\n      \"upah_kerja\": 0,\r\n      \"lain\": 0\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/analyze",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"analyze"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "324"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"144-ZxkI9/KhvFj7o2T/6yFC2hgFKOQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:12:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get analysis results\",\n    \"data\": {\n        \"id\": \"ad699b06-a2c4-4a9c-a3df-da1f8ad74d4a\",\n        \"tanggal\": \"2023-05-16T14:12:35.385Z\",\n        \"jenis_komoditas\": \"Padi\",\n        \"jumlah_panen\": 500,\n        \"produktivitas\": 10000,\n        \"total_biaya_produksi\": 3000000,\n        \"pendapatan\": 50000000,\n        \"keuntungan\": 47000000,\n        \"userId\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Analysis Production For User Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/analyze",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"analyze"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/analyze",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"analyze"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "367"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16f-8rfXuW5vFXFAaH7M64kVQi1rU8w\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:12:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get analysis with userId 0392d374-3da9-48ab-a40c-b8db63d4567a\",\n    \"data\": [\n        {\n            \"id\": \"ad699b06-a2c4-4a9c-a3df-da1f8ad74d4a\",\n            \"tanggal\": \"2023-05-16T14:12:35.385Z\",\n            \"jenis_komoditas\": \"Padi\",\n            \"jumlah_panen\": 500,\n            \"produktivitas\": 10000,\n            \"total_biaya_produksi\": 3000000,\n            \"pendapatan\": 50000000,\n            \"keuntungan\": 47000000,\n            \"userId\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk mendapatkan hasil analisis produktivitas pengguna terhadap tanaman. Terdapat dua enpoint penting disini yaitu membuat analisis produktivitas dan mendapatkan seluruh rekaman data analisis pengguna yang login.\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "WEATHER",
+			"item": [
+				{
+					"name": "Get Weather By Location (In Dashboard)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/weather?lat=3.666810&lon=98.671230",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "3.666810"
+								},
+								{
+									"key": "lon",
+									"value": "98.671230"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEnpoint ini berguna untuk mengambil data cuaca berdasarkan nilai ***lat*** dan ***lon***, yang didapatkan dari ***GPS*** pengguna\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/weather?lat=3.666810&lon=98.671230",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "3.666810"
+										},
+										{
+											"key": "lon",
+											"value": "98.671230"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "240"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f0-/EeO2iJ27TdN41XU0T6adNc9UNk\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 03:35:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater from location\",\n    \"data\": {\n        \"jamCuaca\": \"2023-06-13 06:00:00\",\n        \"kodeCuaca\": \"1\",\n        \"cuaca\": \"Cerah Berawan\",\n        \"humidity\": \"65\",\n        \"tempC\": \"33\",\n        \"tempF\": \"91\",\n        \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather By Keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/weather?search=medan",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "medan"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEndpoint ini berguna untuk mencari seluruh daerah yang terdaftar di database berdasarkan ***keyword*** yang diberikan pengguna. Endpoint ini mungkin berguna untuk fitur pencarian cuaca pada daerah lain, dimana nantinya client akan menampilkan seluruh list daerah yang sesuai dengan ***keyword*** yang dimasukkan, lalu memberikan *id* atau ***lat*** dan ***lon*** ke server untuk memberikan detail dari daerah yang ia ***klik*** atau ***tekan.***\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/weather?search=medan",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "medan"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"130-S5i4k0qyyx2zBqj1+EBpdTl2tu4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 05:36:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater with keyword medan\",\n    \"data\": [\n        {\n            \"id\": \"501235\",\n            \"propinsi\": \"JawaBarat\",\n            \"kota\": \"Kab. Sumedang\",\n            \"kecamatan\": \"Sumedang\",\n            \"lat\": \"-6.850078\",\n            \"lon\": \"107.926941\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather Detail By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/detail/501580",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"detail",
+								"501580"
+							]
+						},
+						"description": "#### Deskripsi\n\nEndpoint ini dapat berguna apabila digunakan bersama dengan endpoint ***get weather by keyword***, yang mana setelah pengguna menekan daerah yang ia pilih, maka client mengirimkan request ke endpoint ini.\n\n#### Params\n\n*   `url` : `http://localhost:5000/weather/[weatherId]`\n*   `answerId` : `501580`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/weather/detail/501580",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather",
+										"detail",
+										"501580"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1419"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"58b-08qr+TajA3QR/dVbJqX2JUVmQvw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 03:36:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater data with ID: 501580\",\n    \"data\": [\n        {\n            \"jamCuaca\": \"2023-06-13 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"100\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 06:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"65\",\n            \"tempC\": \"33\",\n            \"tempF\": \"91\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"27\",\n            \"tempF\": \"81\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 18:00:00\",\n            \"kodeCuaca\": \"60\",\n            \"cuaca\": \"Hujan Ringan\",\n            \"humidity\": \"90\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Pastikan drainase yang baik dan lindungi tanaman dari genangan air.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"28\",\n            \"tempF\": \"82\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 18:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather Detail By Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/detail?lat=3.666810&lon=98.671230",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "3.666810"
+								},
+								{
+									"key": "lon",
+									"value": "98.671230"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEnpoint ini berfungsi untuk mendapatkan detail dari data cuaca saat ini yang ada pada menu ***dashboard***, apabila menu cuaca saat ini di tekan request ke endpoint ini dengan mengirimkan data berupa ***lat*** dan ***lon*** dari pengguna untuk mendapatkan data detail cuaca setiap 6 jam ke depan.\n\n#### Params\n\n*   `url` : `http://localhost:5000/weather/[weatherId]`\n*   `answerId` : `501580`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/weather/detail?lat=3.666810&lon=98.671230",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather",
+										"detail"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "3.666810"
+										},
+										{
+											"key": "lon",
+											"value": "98.671230"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1412"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"584-ddrwK3iRCXvc2/n+hinOHY+Rhb0\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 03:36:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater from location\",\n    \"data\": [\n        {\n            \"jamCuaca\": \"2023-06-13 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"100\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 06:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"65\",\n            \"tempC\": \"33\",\n            \"tempF\": \"91\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"27\",\n            \"tempF\": \"81\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 18:00:00\",\n            \"kodeCuaca\": \"60\",\n            \"cuaca\": \"Hujan Ringan\",\n            \"humidity\": \"90\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Pastikan drainase yang baik dan lindungi tanaman dari genangan air.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"28\",\n            \"tempF\": \"82\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 18:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk mendapatkan prediksi cuaca di suatu tempat berdasarkan beberapa parameter, yaitu ***lat*** dan ***lon***, yang didapat dari client untuk menentukan tempat keberadaan pengguna.\n\n> ***Endpoint ini bisa dipakai oleh user yang belum login.***"
+		},
+		{
+			"name": "RECOMMENDATION",
+			"item": [
+				{
+					"name": "Get All Recommendation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/recommendation",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"recommendation"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/recommendation",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"recommendation"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"db9f-jd2k1owPYZyTHXO5B0UnVcx3T6c\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "14600fe22285f7c6cfaf934f09445ee0;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jun 2023 00:49:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56223"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get all recommendations\",\n    \"data\": [\n        {\n            \"_id\": \"64815a21a28862750503b4da\",\n            \"tanaman\": \"chili\",\n            \"label\": \"chili_whitefly\",\n            \"penyakit\": \"whitefly\",\n            \"penyebab\": \"Serangga kutu putih (Bemisia tabaci) yang menyerang tanaman cabai\",\n            \"gejala\": [\n                \"Adanya kutu putih dewasa yang terlihat seperti serbuk putih yang menempel pada daun dan batang tanaman cabai. Daun yang terinfeksi dapat menguning, mengering, dan gugur lebih awal. Serangan kutu putih juga dapat menyebabkan pertumbuhan tanaman yang terhambat dan produksi buah yang berkurang\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan benih atau bibit yang bebas dari serangga kutu putih untuk menghindari infeksi awal\",\n                \"Periksa secara teratur tanaman cabai Anda untuk mendeteksi adanya kutu putih. Jika terlihat adanya serangan, segera lakukan tindakan pengendalian\",\n                \"Gunakan insektisida yang direkomendasikan oleh ahli pertanian untuk mengendalikan populasi kutu putih\",\n                \"Praktikkan rotasi tanaman untuk mengurangi risiko serangan kutu putih berulang\",\n                \"Bersihkan gulma dan sisa-sisa tanaman yang terinfeksi di sekitar area tanaman cabai untuk menghilangkan tempat persembunyian dan sumber infeksi\",\n                \"Gunakan perangkap kuning yang dilapisi dengan lem lengket untuk menarik dan menangkap kutu putih\",\n                \"Jika serangan kutu putih terlalu parah, pertimbangkan untuk menggunakan metode pengendalian biologi seperti penggunaan predator alami atau parasitoid yang dapat memakan atau mengendalikan populasi kutu putih\",\n                \"Dalam kasus yang parah, konsultasikan dengan ahli pertanian atau petani lokal untuk saran dan bantuan lebih lanjut dalam pengendalian kutu putih\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/d6c09fcc-c3cc-41da-a744-efcf95f3e1ff-chili whitefly 23.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815ab6a28862750503b4dc\",\n            \"tanaman\": \"chili\",\n            \"label\": \"chili_yellowish\",\n            \"penyakit\": \"yellowish\",\n            \"penyebab\": \"Infeksi oleh virus, seperti Virus Mosaik Cabai atau Virus Kuning Cabai\",\n            \"gejala\": [\n                \"Daun cabai berubah menjadi kuning secara keseluruhan atau hanya pada bagian tertentu. Warnanya sering kali terlihat kuning pucat hingga kuning kehijauan. Selain itu, tanaman cabai yang terinfeksi juga dapat mengalami pertumbuhan terhambat, daun keriting, dan produksi buah yang berkurang\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih benih atau bibit yang bebas dari virus yang menyebabkan penyakit kuning pada cabai\",\n                \"Hindari penularan virus dengan menghindari tanaman yang terinfeksi dan menjaga kebersihan kebun\",\n                \"Gunakan perisai fisik seperti penutup baris atau jaring serangga untuk melindungi tanaman dari serangga vektor yang dapat menularkan virus\",\n                \"Periksa secara teratur tanaman cabai untuk mendeteksi gejala awal infeksi. Jika ada tanaman yang terinfeksi, segera hapus dan hancurkan untuk mencegah penyebaran virus\",\n                \"Jaga kebersihan kebun dengan membersihkan gulma dan sisa-sisa tanaman yang terinfeksi\",\n                \"Praktikkan rotasi tanaman untuk mengurangi risiko infeksi virus yang berulang\",\n                \"Jika ada serangan virus yang signifikan, konsultasikan dengan ahli pertanian atau petani lokal untuk saran dan bantuan lebih lanjut dalam mengendalikan penyakit kuning pada cabai\",\n                \"Pastikan tanaman cabai mendapatkan nutrisi yang cukup dan perawatan yang baik secara keseluruhan untuk meningkatkan daya tahan terhadap penyakit dan meminimalkan risiko infeksi virus\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/58637a50-1ea3-4a35-96e0-75144b97c04e-yellowish06 (1).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815bd8a28862750503b4de\",\n            \"tanaman\": \"guava\",\n            \"label\": \"guava_canker\",\n            \"penyakit\": \"canker\",\n            \"penyebab\": \"Jambu Biji Canker disebabkan oleh infeksi patogen bakteri, terutama Xanthomonas campestris pv. psidii\",\n            \"gejala\": [\n                \"Terbentuknya lesi berwarna coklat atau hitam pada batang, cabang, daun, atau buah jambu biji\",\n                \"Lesi dapat memperbesar ukurannya seiring dengan perkembangan penyakit, dan sering kali memiliki tepi yang jelas dan berwarna lebih gelap\",\n                \"Pada perkembangan yang parah, lesi dapat mengakibatkan kekeringan, kerusakan jaringan, dan bahkan kerusakan struktural pada tanaman\",\n                \"Infeksi pada buah dapat menyebabkan deformasi, pembusukan, atau penurunan kualitas buah\"\n            ],\n            \"rekomendasi\": [\n                \"Pemilihan bibit yang sehat dan bebas dari penyakit saat menanam jambu biji\",\n                \"Praktik sanitasi yang baik dengan membuang dan menghancurkan sisa-sisa tanaman yang terinfeksi\",\n                \"Pengelolaan kebersihan kebun dengan menghilangkan gulma dan sisa-sisa tanaman yang dapat menjadi tempat berkembang biak bagi patogen\",\n                \"Pemangkasan dan pemeliharaan tanaman yang tepat untuk memastikan sirkulasi udara yang baik dan mengurangi risiko infeksi\",\n                \"Penggunaan fungisida atau bakterisida yang direkomendasikan oleh ahli pertanian, terutama jika risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Penggunaan teknik irigasi yang tepat untuk menghindari kondisi lembab yang dapat memicu perkembangan penyakit\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/05ce1901-3089-4c15-b142-9d54fee233d8-test_0_162.jpeg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815ca1a28862750503b4e0\",\n            \"tanaman\": \"guava\",\n            \"label\": \"guava_dot\",\n            \"penyakit\": \"dot\",\n            \"penyebab\": \"Penyakit Dot disebabkan oleh infeksi patogen jamur Colletotrichum gloeosporioides atau Colletotrichum acutatum\",\n            \"gejala\": [\n                \"Terbentuknya lesi berwarna coklat gelap atau hitam pada buah jambu yang matang\",\n                \"Lesi awalnya berbentuk titik kecil yang kemudian berkembang menjadi bintik-bintik yang lebih besar\",\n                \"Lesi dapat melebar dan menyebabkan kerusakan pada kulit buah\",\n                \"Lesi juga dapat mengeluarkan spora berwarna merah yang tampak seperti titik-titik merah di permukaan buah yang terinfeksi\",\n                \"Infeksi serius dapat menyebabkan pembusukan buah, kerontokan buah yang lebih cepat, dan penurunan kualitas hasil panen\"\n            ],\n            \"rekomendasi\": [\n                \"Pemilihan bibit yang sehat dan bebas dari penyakit saat menanam jambu dot\",\n                \"Praktik sanitasi yang baik dengan membuang dan menghancurkan buah yang terinfeksi serta sisa-sisa tanaman yang terkena penyakit\",\n                \"Pengelolaan kebersihan kebun dengan menghilangkan gulma dan serasah yang dapat menjadi tempat berkembang biak bagi patogen\",\n                \"Penerapan teknik irigasi yang tepat untuk menghindari kelebihan kelembaban dan meminimalkan kondisi yang mendukung pertumbuhan jamur\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemangkasan dan pemeliharaan tanaman yang tepat untuk memastikan sirkulasi udara yang baik di antara pohon jambu dot\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/5d4f77b4-8987-4ae3-b256-4c206f31a16a-0015_0123.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815dc6a28862750503b4e2\",\n            \"tanaman\": \"guava\",\n            \"label\": \"guava_mummification\",\n            \"penyakit\": \"mummification\",\n            \"penyebab\": \"Jambu Biji Mummification disebabkan oleh infeksi patogen jamur Colletotrichum gloeosporioides\",\n            \"gejala\": [\n                \"Buah jambu biji yang terinfeksi mengalami pengerutan dan pengeringan yang ekstensif\",\n                \"Buah yang terinfeksi berubah menjadi keras, kering, dan terlihat seperti mumi\",\n                \"Permukaan buah mungkin ditutupi dengan lapisan jamur berwarna gelap atau hitam\",\n                \"Buah yang terinfeksi tidak berkembang atau matang dengan baik, mengakibatkan penurunan kualitas dan hasil panen yang signifikan\"\n            ],\n            \"rekomendasi\": [\n                \"Pemilihan bibit yang sehat dan bebas dari penyakit saat menanam jambu biji\",\n                \"Praktik sanitasi yang baik dengan membuang dan menghancurkan buah yang terinfeksi serta sisa-sisa tanaman yang terkena penyakit\",\n                \"Pengelolaan kebersihan kebun dengan menghilangkan gulma dan serasah yang dapat menjadi tempat berkembang biak bagi patogen\",\n                \"Penerapan teknik irigasi yang tepat untuk menghindari kelebihan kelembaban dan meminimalkan kondisi yang mendukung pertumbuhan jamur\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemangkasan dan pemeliharaan tanaman yang tepat untuk memastikan sirkulasi udara yang baik di antara pohon jambu biji\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/adeac27a-cdba-4654-a292-0c9f3b63da04-test_0_278.jpeg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815e9ca28862750503b4e4\",\n            \"tanaman\": \"guava\",\n            \"label\": \"guava_rust\",\n            \"penyakit\": \"rust\",\n            \"penyebab\": \"Penyakit Jambu Biji Rust disebabkan oleh infeksi jamur Phakopsora psidii\",\n            \"gejala\": [\n                \"Terbentuknya bintik-bintik kecil berwarna kemerahan atau jingga pada permukaan daun jambu biji\",\n                \"Bintik-bintik tersebut kemudian berkembang menjadi pustula berwarna coklat kehitaman dengan tepi yang jelas\",\n                \"Pustula dapat terlihat seperti kumpulan serbuk yang menutupi permukaan daun\",\n                \"Infeksi juga dapat terjadi pada batang, ranting, dan buah jambu biji\"\n            ],\n            \"rekomendasi\": [\n                \"Pemilihan bibit yang sehat dan bebas dari penyakit saat menanam jambu biji\",\n                \"Praktik sanitasi yang baik dengan membuang dan menghancurkan daun yang terinfeksi serta sisa-sisa tanaman yang terkena penyakit\",\n                \"Pengelolaan kebersihan kebun dengan menghilangkan gulma dan serasah yang dapat menjadi tempat berkembang biak bagi patogen\",\n                \"Pemberian pupuk yang seimbang dan pengaturan irigasi yang tepat untuk memperkuat ketahanan tanaman\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemangkasan dan pemeliharaan tanaman yang tepat untuk memastikan sirkulasi udara yang baik di antara pohon jambu biji\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/97ef9529-16a6-4e6c-b8be-ba1f47cb54f9-test_0_246.jpeg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64815fd3a28862750503b4e8\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_anthracnose_disease\",\n            \"penyakit\": \"anthracnose disease\",\n            \"penyebab\": \"Jamur Colletotrichum gloeosporioides atau Glomerella cingulata\",\n            \"gejala\": [\n                \"Bercak gelap atau merah pada buah yang berkembang menjadi lesi dengan tepi coklat. Lesi tersebut dapat berkembang menjadi busuk berwarna hitam\"\n            ],\n            \"rekomendasi\": [\n                \"Jaga kebersihan kebun dengan membuang buah atau daun yang terinfeksi\",\n                \"Hindari kelembaban berlebihan dengan menyiram tanaman di pagi hari dan memastikan sirkulasi udara yang baik\",\n                \"Gunakan fungisida yang sesuai seperti mankozeb atau klorotalonil sesuai petunjuk pada label\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/bc7683e7-fce3-4623-966a-1e4f7b224ef5-20211011_133407 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481609ba28862750503b4ea\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_powdery_mildew_disease\",\n            \"penyakit\": \"powdery mildew disease\",\n            \"penyebab\": \"Jamur Oidium mangiferae\",\n            \"gejala\": [\n                \"Lapisan serbuk putih pada daun, batang, atau buah tanaman mangga\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas yang tahan terhadap penyakit ini jika tersedia\",\n                \"Pastikan tanaman mendapatkan cahaya matahari yang cukup dan sirkulasi udara yang baik\",\n                \"Jaga kebersihan kebun dengan membuang daun yang terinfeksi\",\n                \"Gunakan fungisida yang direkomendasikan oleh ahli pertanian\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/7dc33182-0a22-4be8-b910-08e26eb0aa7e-20211109_121218 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481612bd65917817e284973\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_bacterial_canker_disease\",\n            \"penyakit\": \"bacterial canker disease\",\n            \"penyebab\": \"Penyakit Mangga Bacterial Canker disebabkan oleh bakteri Xanthomonas campestris pv. mangiferaeindicae\",\n            \"gejala\": [\n                \"Terbentuknya lesi berwarna coklat pada batang, cabang, dan daun tanaman mangga\",\n                \"Lesi tersebut dapat berkembang menjadi lepuhan berwarna coklat gelap yang mengeluarkan lendir berwarna kuning atau coklat\",\n                \"Pada perkembangan lebih lanjut, lesi dapat mengering dan mengeras, membentuk kerak atau sisik pada permukaan batang\",\n                \"Lesi juga dapat muncul pada buah, dengan tanda-tanda bercak berwarna coklat atau hitam yang membusuk\",\n                \"Infeksi yang parah dapat menyebabkan kekeringan dan kematian tanaman mangga\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas mangga yang tahan terhadap penyakit Mangga Bacterial Canker jika tersedia\",\n                \"Pastikan kebersihan kebun dengan menghilangkan sisa-sisa tanaman yang terinfeksi, terutama pada akhir musim tanam\",\n                \"Hindari luka pada tanaman mangga yang dapat menjadi pintu masuk bagi bakteri penyebab penyakit. Jaga kebersihan alat-alat pertanian yang digunakan\",\n                \"Penggunaan fungisida bakterisida yang direkomendasikan oleh ahli pertanian dapat membantu dalam pengendalian penyakit\",\n                \"Jaga kondisi pertumbuhan tanaman dengan memberikan cahaya matahari yang cukup, sirkulasi udara yang baik, dan pemupukan yang seimbang untuk meningkatkan ketahanan tanaman terhadap penyakit\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/0807edae-ac7f-4d30-8f32-6d3d1d55e9b7-IMG_20211106_134352 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"648162bfd65917817e284975\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_cutting_weevil_disease\",\n            \"penyakit\": \"cutting weevil disease\",\n            \"penyebab\": \"Mangga Cutting Weevil disebabkan oleh serangga Curculio sp. yang termasuk dalam keluarga Curculionidae\",\n            \"gejala\": [\n                \"Serangga dewasa Curculio sp. menggigit dan membuat luka berbentuk cekung pada permukaan kulit buah mangga\",\n                \"Serangan serangga pada buah yang masih muda dapat menyebabkan kerusakan parah yang dapat berdampak pada kualitas dan kuantitas hasil panen\",\n                \"Biasanya terdapat bukti keberadaan serangga dewasa di sekitar buah yang terinfeksi, seperti telur atau bekas larva\"\n            ],\n            \"rekomendasi\": [\n                \"Pemantauan dan pengendalian hama secara teratur dengan mengamati tanda-tanda serangan serangga dewasa dan tindakan pengendalian yang tepat\",\n                \"Pembersihan lahan sekitar kebun dari sisa-sisa buah yang terinfeksi atau busuk untuk mengurangi sumber serangga dewasa\",\n                \"Penerapan metode pengendalian serangga yang terintegrasi, seperti penggunaan perangkap feromon atau perangkap lengket, yang dapat mengurangi populasi serangga dewasa\",\n                \"Penggunaan insektisida yang direkomendasikan oleh ahli pertanian, jika diperlukan, dengan memperhatikan petunjuk penggunaan dan dosis yang tepat\",\n                \"Pengelolaan kebersihan kebun dengan membersihkan gulma dan sisa-sisa tanaman yang dapat menjadi tempat berkembang biak bagi serangga\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/95db07e1-e4a8-42a3-bfcc-1e56ac7e5507-20211011_161532 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64816356d65917817e284977\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_dieback_disease\",\n            \"penyakit\": \"dieback disease\",\n            \"penyebab\": \"Mangga Die Back disebabkan oleh infeksi patogen jamur, seperti Lasiodiplodia theobromae atau Diaporthe sp\",\n            \"gejala\": [\n                \"Kematian dan kemunduran tanaman mangga secara bertahap, dimulai dari ujung cabang dan kemudian merambat ke bagian yang lebih besar\",\n                \"Mengeringnya daun dan cabang tanaman, yang kemudian berubah menjadi coklat atau hitam\",\n                \"Terbentuknya lesi atau luka pada batang dan cabang tanaman mangga\",\n                \"Produksi buah yang rendah atau bahkan tidak ada\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas mangga yang tahan terhadap penyakit Mangga Die Back, jika tersedia\",\n                \"Praktik sanitasi yang baik dengan membersihkan sisa-sisa tanaman yang terinfeksi dan membuangnya dari area kebun\",\n                \"Jaga kebersihan kebun dengan menghilangkan gulma dan serasah yang dapat menjadi tempat berkembang biak bagi patogen\",\n                \"Pemangkasan dan pemeliharaan tanaman yang tepat untuk memastikan sirkulasi udara yang baik dan mengurangi risiko infeksi\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat infeksi sudah parah atau risiko kerugian tinggi\",\n                \"Penggunaan benih dan bibit yang bebas dari patogen penyebab penyakit\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/ca49ba82-6d8a-487c-8f12-83bf5ca6df9a-20211129_160849 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"648163e2d65917817e284979\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_gall_midge_disease\",\n            \"penyakit\": \"gall midge disease\",\n            \"penyebab\": \"Mangga Gall Midge disebabkan oleh serangga kecil yang termasuk dalam keluarga Cecidomyiidae, terutama Dasyneura mangiferae\",\n            \"gejala\": [\n                \"Pembentukan gumpalan atau bengkak yang disebut gall pada daun, tunas, bunga, atau buah mangga\",\n                \"Gall biasanya berukuran kecil dan memiliki warna yang berbeda, seperti merah muda, merah, atau hijau\",\n                \"Serangan pada daun dapat menyebabkan kerusakan yang signifikan, termasuk penyusutan dan deformasi daun\",\n                \"Gall pada buah dapat mengganggu pertumbuhan normal dan mengurangi kualitas serta hasil panen\"\n            ],\n            \"rekomendasi\": [\n                \"Pemantauan dan pengendalian serangga secara teratur dengan mengamati tanda-tanda serangan dan tindakan pengendalian yang tepat\",\n                \"Pembersihan lahan sekitar kebun dari sisa-sisa buah dan tanaman yang terinfeksi untuk mengurangi sumber serangga dewasa dan larva\",\n                \"Penerapan metode pengendalian serangga yang terintegrasi, seperti penggunaan perangkap feromon atau perangkap lengket, yang dapat mengurangi populasi serangga dewasa\",\n                \"Penggunaan insektisida yang direkomendasikan oleh ahli pertanian, jika diperlukan, dengan memperhatikan petunjuk penggunaan dan dosis yang tepat\",\n                \"Jaga kebersihan kebun dengan membersihkan gulma dan sisa-sisa tanaman yang dapat menjadi tempat berkembang biak bagi serangga.\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/89cdf5bc-916d-4243-8f90-e0dabfd2223d-IMG_20211106_161353 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64816482d65917817e28497b\",\n            \"tanaman\": \"mango\",\n            \"label\": \"mango_antraknosa\",\n            \"penyakit\": \"antraknosa\",\n            \"penyebab\": \"Sooty Mould pada mangga disebabkan oleh pertumbuhan jamur pada cairan manis yang dikeluarkan oleh serangga penghisap, seperti kutu daun atau ulat pengisap\",\n            \"gejala\": [\n                \"Permukaan daun, ranting, dan buah ditutupi dengan lapisan hitam atau kelabu yang terlihat seperti jelaga\",\n                \"Lapisan hitam ini sebenarnya adalah koloni jamur yang tumbuh di atas cairan manis yang dikeluarkan oleh serangga penghisap\",\n                \"Infeksi Sooty Mould pada mangga biasanya tidak merusak tanaman secara langsung, tetapi dapat menghambat proses fotosintesis dan mengurangi hasil panen\"\n            ],\n            \"rekomendasi\": [\n                \"Kontrol serangga penghisap dengan menggunakan insektisida yang direkomendasikan oleh ahli pertanian\",\n                \"Pemantauan secara teratur untuk deteksi dini serangga penghisap dan tindakan pengendalian yang tepat\",\n                \"Pembersihan daun dan permukaan tanaman yang terinfeksi menggunakan air atau larutan sabun lembut untuk menghilangkan lapisan Sooty Mould\",\n                \"Menghilangkan atau mengendalikan sumber serangga penghisap yang dapat menyebabkan cairan manis, seperti kutu daun, ulat pengisap, atau tungau\",\n                \"Peningkatan ventilasi dan pencahayaan di kebun untuk mengurangi kondisi yang menguntungkan bagi pertumbuhan jamur\",\n                \"Memperbaiki kebersihan umum kebun dengan menghilangkan serasah, gulma, dan sisa-sisa tanaman yang dapat menjadi tempat berkembang biak bagi serangga penghisap\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/6dffd29c-5e16-4ef3-879d-c0cf2d44c4c4-IMG_20211108_120906 (Custom).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481688ac7a9a4f88dafc24b\",\n            \"tanaman\": \"corn\",\n            \"label\": \"corn_northern_leaf_blight\",\n            \"penyakit\": \"northern leaf blight\",\n            \"penyebab\": \"Penyakit jagung blight disebabkan oleh beberapa patogen, termasuk jamur, bakteri, dan virus. Jamur Fusarium spp., Xanthomonas spp., dan virus Maize dwarf mosaic (MDMV) adalah beberapa penyebab umum penyakit ini\",\n            \"gejala\": [\n                \"Bercak-barcak coklat atau hitam pada daun, tangkai daun, dan batang tanaman jagung\",\n                \"Mengeringnya dan melengkungnya daun-daun yang terinfeksi\",\n                \"Pembusukan batang dan tongkol jagung\",\n                \"Penurunan pertumbuhan tanaman, gagal panen, atau bahkan kematian tanaman\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas jagung yang tahan terhadap patogen penyebab jagung blight\",\n                \"Praktik sanitasi yang baik dengan membersihkan sisa-sisa tanaman yang terinfeksi di sekitar area pertanaman\",\n                \"Rotasi tanaman dengan tanaman yang tidak rentan terhadap penyakit blight\",\n                \"Penggunaan benih yang bersih dan bebas dari patogen\",\n                \"Penggunaan fungisida atau insektisida yang direkomendasikan oleh ahli pertanian jika diperlukan\",\n                \"Memantau secara rutin pertumbuhan tanaman dan segera mengambil tindakan jika terdeteksi gejala penyakit\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/0db08b95-cc2d-437a-b87e-bcd3e2b3c43c-Corn_Blight (6).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481690e78deef5b99e150d5\",\n            \"tanaman\": \"corn\",\n            \"label\": \"corn_common_rust\",\n            \"penyakit\": \"common rust\",\n            \"penyebab\": \"Penyakit jagung Common Rust disebabkan oleh jamur Puccinia sorghi\",\n            \"gejala\": [\n                \"Terbentuknya bercak-bercak berwarna kuning atau oranye pada daun jagung\",\n                \"Pembentukan telur-telur spora berwarna oranye pada permukaan bawah daun\",\n                \"Pada perkembangan selanjutnya, bercak-bercak tersebut dapat membesar dan menggabung menjadi pola pita berwarna kuning atau oranye pada daun\",\n                \"Tanaman yang terinfeksi mungkin mengalami penurunan pertumbuhan dan produktivitas yang signifikan\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas jagung yang tahan terhadap penyakit Com- mon Rust\",\n                \"Praktik sanitasi yang baik dengan membersihkan sisa-sisa tanaman yang terinfeksi dan menghindari penumpukan serasah di sekitar tanaman jagung\",\n                \"Penggunaan pemupukan yang seimbang untuk menjaga kesehatan tanaman dan meningkatkan ketahanannya terhadap penyakit\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian saat infeksi penyakit menjadi parah atau jika terdapat risiko kerugian yang tinggi\",\n                \"Pengawasan rutin terhadap pertumbuhan tanaman jagung untuk mendeteksi gejala penyakit Common Rust secara dini dan mengambil tindakan yang tepat\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/c9418321-95fc-4f96-bc5a-d527d61f15d4-Corn_Common_Rust (29).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481699978deef5b99e150d7\",\n            \"tanaman\": \"corn\",\n            \"label\": \"corn_gray_leaf_spot\",\n            \"penyakit\": \"gray leaf spot\",\n            \"penyebab\": \"Penyakit Gray Leaf Spot pada jagung disebabkan oleh jamur Cercospora zeae-maydis\",\n            \"gejala\": [\n                \"Terbentuknya bercak-bercak kecil berwarna coklat dengan tepi berbentuk segitiga pada daun jagung\",\n                \"Bercak-bercak tersebut kemudian berkembang menjadi lesi berwarna coklat tua atau abu-abu dengan tengah yang memucat\",\n                \"Lesi dapat menyatu dan membentuk area yang lebih besar pada daun\",\n                \"Daun yang terinfeksi dapat mengering, menguning, atau bahkan mengalami nekrosis pada bagian tertentu\",\n                \"Pada kondisi yang parah, penyakit ini dapat menyebabkan kerugian signifikan dalam hasil panen\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas jagung yang tahan terhadap penyakit Gray Leaf Spot\",\n                \"Jaga kebersihan lahan dengan menghilangkan sisa-sisa tanaman yang terinfeksi dan serasah yang berpotensi menjadi sumber infeksi\",\n                \"Lakukan rotasi tanaman untuk mengurangi risiko penyebaran penyakit di musim tanam berikutnya\",\n                \"Gunakan pemupukan yang seimbang dan optimal untuk menjaga kestabilan tanaman jagung dan ketahanannya terhadap penyakit\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian dapat dilakukan jika infeksi penyakit menjadi parah atau jika risiko kerugian tinggi\",\n                \"Pantau secara rutin pertumbuhan tanaman jagung untuk mendeteksi gejala penyakit Gray Leaf Spot sedini mungkin dan ambil tindakan yang diperlukan\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/f25661ba-b983-4837-b313-a37318675515-Corn_Gray_Spot (27).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64816ad578deef5b99e150d9\",\n            \"tanaman\": \"cassava\",\n            \"label\": \"cassava_bacterial_blight\",\n            \"penyakit\": \"bacterial blight\",\n            \"penyebab\": \"Penyakit Bacterial Blight pada tanaman cassava disebabkan oleh infeksi bakteri Xanthomonas axonopodis pv. manihotis\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak berwarna coklat gelap atau hitam pada daun tanaman cassava\",\n                \"Bercak-bercak tersebut dapat memiliki tepi yang tajam dan seringkali memanjang sejajar dengan serat daun\",\n                \"Bercak-bercak dapat membesar dan menggabung, mengakibatkan nekrosis dan pengeringan pada daun\",\n                \"Jika infeksi parah, daun dapat mengalami defoliasi, mengurangi produksi dan kualitas umbi cassava\"\n            ],\n            \"rekomendasi\": [\n                \"Penggunaan bibit yang bebas penyakit dan sehat saat menanam cassava\",\n                \"Pembersihan kebun cassava dari sisa-sisa tanaman yang terinfeksi untuk mengurangi sumber infeksi\",\n                \"Pengaturan jarak tanam yang cukup untuk meningkatkan sirkulasi udara dan mengurangi kelembaban di antara tanaman\",\n                \"Penggunaan pestisida bakterisida yang direkomendasikan oleh ahli pertanian\",\n                \"Pemupukan yang seimbang dan pengaturan irigasi yang tepat untuk menjaga kesehatan tanaman dan mengurangi stres\",\n                \"Pemangkasan dan penjarangan tanaman untuk menghilangkan bagian-bagian yang terinfeksi\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/39618620-aaaa-4bf3-8c20-166d45fa4bcf-29400522.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64816b5778deef5b99e150db\",\n            \"tanaman\": \"cassava\",\n            \"label\": \"cassava_brown_streak_disease\",\n            \"penyakit\": \"brown streak disease\",\n            \"penyebab\": \"Penyakit Brown Streak Disease pada tanaman cassava disebabkan oleh dua jenis virus, yaitu Cassava brown streak virus (CBSV) dan Ugandan cassava brown streak virus (UCBSV)\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak berwarna coklat kekuningan pada batang dan daun muda tanaman cassava\",\n                \"Bercak-bercak tersebut kemudian berkembang menjadi garis-garis coklat gelap yang memanjang di sepanjang batang dan pembuluh daun\",\n                \"Pada daun yang terinfeksi, muncul bercak klorosis di antara serat-serat daun, diikuti oleh nekrosis pada daun tersebut\",\n                \"Infeksi yang parah dapat menyebabkan penurunan produksi umbi cassava\"\n            ],\n            \"rekomendasi\": [\n                \"Penggunaan bibit yang bebas penyakit dan sehat saat menanam cassava\",\n                \"Pemilihan varietas cassava yang lebih tahan terhadap penyakit Brown Streak Disease jika tersedia\",\n                \"Pengelolaan serangga vektor yang menularkan virus, seperti kutu daun putih\",\n                \"Pembersihan kebun cassava dari sisa-sisa tanaman yang terinfeksi untuk mengurangi sumber infeksi\",\n                \"Penggunaan teknik karantina untuk mengendalikan penyebaran penyakit\",\n                \"Penggunaan insektisida untuk mengurangi populasi vektor serangga\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/3f9b5752-2aa3-49da-a12c-942d0b9ef60c-101253257.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481805704b9cda09a53e1c6\",\n            \"tanaman\": \"cassava\",\n            \"label\": \"cassava_green_mottle\",\n            \"penyakit\": \"green mottle\",\n            \"penyebab\": \"Penyakit Green Mottle pada tanaman cassava disebabkan oleh infeksi virus Cassava green mottle virus (CGMV)\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak atau pola-pola berwarna terang atau kekuningan pada daun tanaman cassava\",\n                \"Bercak-bercak tersebut dapat membentuk pola mosaik atau pola datar yang berbeda pada daun\",\n                \"Daun yang terinfeksi dapat memiliki tekstur yang keriput atau kering\",\n                \"Pada tahap lanjut, daun dapat mengalami nekrosis dan mengering\",\n                \"Tanaman cassava yang terinfeksi juga dapat mengalami stunting pertumbuhan dan penurunan hasil\"\n            ],\n            \"rekomendasi\": [\n                \"Penggunaan bibit yang bebas penyakit dan sehat saat menanam cassava\",\n                \"Pemilihan varietas cassava yang lebih tahan terhadap penyakit Green Mottle jika tersedia\",\n                \"Pembersihan kebun cassava dari sisa-sisa tanaman yang terinfeksi untuk mengurangi sumber infeksi\",\n                \"Penggunaan teknik karantina untuk mengendalikan penyebaran penyakit\",\n                \"Penggunaan insektisida untuk mengurangi populasi vektor serangga yang dapat menularkan virus\",\n                \"Penggunaan teknik budidaya yang baik, seperti pemupukan yang seimbang dan pengaturan irigasi yang tepat, untuk menjaga kesehatan tanaman dan mengurangi stres\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/a49541f6-f42b-4590-9e4e-5eb155de7acd-115438345.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"648183f5037c9a44fb949827\",\n            \"tanaman\": \"cassava\",\n            \"label\": \"cassava_mosaic_disease\",\n            \"penyakit\": \"mosaic disease\",\n            \"penyebab\": \"Penyakit Mosaic pada tanaman cassava disebabkan oleh infeksi virus, terutama Cassava mosaic virus (CMV) dan African cassava mosaic virus (ACMV)\",\n            \"gejala\": [\n                \"Munculnya pola-pola atau bercak-bercak berwarna terang atau kekuningan pada daun tanaman cassava\",\n                \"Bercak-bercak tersebut dapat membentuk pola mosaik atau pola datar yang berbeda pada daun\",\n                \"Daun yang terinfeksi dapat mengalami pucat, menguning, atau klorosis\",\n                \"Pertumbuhan tanaman cassava yang terinfeksi juga dapat terhambat, mengakibatkan stunting dan penurunan hasil\"\n            ],\n            \"rekomendasi\": [\n                \"Penggunaan bibit yang bebas penyakit dan sehat saat menanam cassava\",\n                \"Pemilihan varietas cassava yang lebih tahan terhadap penyakit Mosaic jika tersedia\",\n                \"Pembersihan kebun cassava dari sisa-sisa tanaman yang terinfeksi untuk mengurangi sumber infeksi\",\n                \"Penggunaan teknik karantina untuk mengendalikan penyebaran penyakit\",\n                \"Penggunaan insektisida untuk mengurangi populasi vektor serangga yang dapat menularkan virus\",\n                \"Penggunaan teknik budidaya yang baik, seperti pemupukan yang seimbang dan pengaturan irigasi yang tepat, untuk menjaga kesehatan tanaman dan mengurangi stres\",\n                \"Penggunaan metode pengendalian hayati, seperti penggunaan predator atau musuh alami vektor serangga\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/a6c03813-992a-4069-b7df-3ec2b2adfe6e-104769172.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481c60cfa7559b08bf76c7e\",\n            \"tanaman\": \"chili\",\n            \"label\": \"chili_leaf_curl\",\n            \"penyakit\": \"leaf curl\",\n            \"penyebab\": \"Jamur Pyricularia oryzae\",\n            \"gejala\": [\n                \"Bercak berbentuk oval dengan tepi gelap pada daun, batang, dan malai padi\"\n            ],\n            \"rekomendasi\": [\n                \"Pilih varietas beras yang tahan terhadap penyakit blast\",\n                \"Jaga kebersihan kebun dengan membuang sisa-sisa tanaman yang terinfeksi\",\n                \"Gunakan fungisida yang direkomendasikan oleh ahli pertanian\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/db284484-d252-4084-9e15-4b0c6a1bf61b-download (1).jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481c6c9fa7559b08bf76c80\",\n            \"tanaman\": \"chili\",\n            \"label\": \"chili_leaf_spot\",\n            \"penyakit\": \"leaf spot\",\n            \"penyebab\": \"Jamur Cercospora capsici\",\n            \"gejala\": [\n                \"Bercak-bintik berwarna coklat pada daun cabai, yang kemudian berkembang menjadi bercak berbentuk bulat dengan tengah berwarna terang dan tepi yang lebih gelap\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan benih atau bibit yang bebas penyakit untuk mengurangi risiko infeksi\",\n                \"Jaga kebersihan kebun dengan membersihkan daun-daun yang terinfeksi dan buang sisa-sisa tanaman yang terkena\",\n                \"Hindari penyiraman berlebih dan usahakan penyiraman pada pagi hari untuk mengurangi kelembaban di daun\",\n                \"Gunakan fungisida yang direkomendasikan oleh ahli pertanian untuk pengendalian penyakit\",\n                \"Pastikan jarak antara tanaman cabai cukup agar sirkulasi udara optimal\",\n                \"Rotasi tanaman dengan tanaman non-solanaceous (tanaman dari keluarga lain) untuk mengurangi risiko infeksi berulang\",\n                \"Jika penyakit sudah parah, potong dan hancurkan bagian tanaman yang terinfeksi untuk mencegah penyebaran lebih lanjut\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/abc7ae50-c66c-4c09-8623-e7d731c6a065-leaf spot02.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481ca0bc8e20103221ec23b\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_algal_leaf\",\n            \"penyakit\": \"algal leaf\",\n            \"penyebab\": \"Penyakit Alga Leaf pada tanaman teh disebabkan oleh pertumbuhan alga yang berlebihan, biasanya dari genus Cephaleuros\",\n            \"gejala\": [\n                \"Munculnya lapisan hijau atau kecoklatan pada permukaan daun tanaman teh\",\n                \"Lapisan tersebut biasanya berbentuk bercak-bercak dan terlihat seperti penutup atau selaput tipis\",\n                \"Daun yang terinfeksi dapat terlihat kusam, menguning, atau bahkan rontok\",\n                \"Infeksi yang parah dapat menyebabkan penurunan produksi dan kualitas daun teh\"\n            ],\n            \"rekomendasi\": [\n                \"Pemeliharaan kebersihan kebun teh dengan memastikan area sekitar tanaman bebas dari reruntuhan daun atau serasah yang dapat menjadi tempat perkembangbiakan alga\",\n                \"Pemangkasan dan pembuangan daun yang terinfeksi secara rutin untuk mengurangi populasi alga\",\n                \"Penerapan sanitasi yang baik dengan membersihkan peralatan pertanian yang digunakan di kebun teh\",\n                \"Pengelolaan pengairan yang tepat untuk menghindari kondisi yang memicu pertumbuhan alga\",\n                \"Penggunaan fungisida atau algaecide yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemilihan varietas tanaman teh yang lebih tahan terhadap penyakit Alga Leaf jika tersedia\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/49ddf426-171f-485a-9117-dead4e897eb4-algal_leaf_in_tea4.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481cabdc8e20103221ec23d\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_anthracnose\",\n            \"penyakit\": \"anthracnose\",\n            \"penyebab\": \"Penyakit Antraknosa pada tanaman teh disebabkan oleh infeksi jamur Colletotrichum spp., seperti Colletotrichum gloeosporioides atau Colletotrichum camelliae\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak berbentuk cincin atau oval dengan tepi merah tua atau coklat pada daun tanaman teh\",\n                \"Bercak-bercak tersebut dapat memperluas hingga mencakup seluruh permukaan daun dan merembes ke tangkai daun\",\n                \"Bercak-bercak tersebut kemudian berkembang menjadi lesi yang lembab, menghasilkan spora berwarna gelap yang terlihat pada permukaan daun\",\n                \"Lesi yang parah dapat menyebabkan pengeringan dan kerusakan pada daun, bahkan mengakibatkan defoliasi\"\n            ],\n            \"rekomendasi\": [\n                \"Pemeliharaan kebersihan kebun teh dengan membuang dan menghancurkan sisa-sisa tanaman yang terinfeksi\",\n                \"Pemangkasan dan penjarangan tanaman untuk meningkatkan sirkulasi udara yang baik di antara tanaman teh\",\n                \"Pemberian pupuk yang seimbang dan pengaturan irigasi yang tepat untuk menjaga kekuatan tanaman dan mengurangi stres\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pengendalian gulma yang baik untuk mengurangi kelembaban dan keberadaan patogen\",\n                \"Pemilihan varietas tanaman teh yang lebih tahan terhadap penyakit Antraknosa jika tersedia\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/416d6398-0925-4312-b432-b46249a71268-anthracnose_in_tea14.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481cb64c8e20103221ec23f\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_bird_eye_spot\",\n            \"penyakit\": \"bird eye spot\",\n            \"penyebab\": \"Penyakit Bird Eye Spot pada tanaman teh disebabkan oleh infeksi jamur Mycena citricolor atau Sphaeropsis theae\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak berbentuk bulat atau oval dengan warna coklat muda pada daun tanaman teh\",\n                \"Bercak-bercak tersebut memiliki pusat berwarna terang dengan pinggiran yang lebih gelap\",\n                \"Pada tahap perkembangan selanjutnya, bercak-bercak dapat membesar dan menggabung menjadi lesi berukuran lebih besar\",\n                \"Lesi dapat meluas hingga mencakup sebagian besar daun, mengakibatkan kerusakan pada jaringan dan kehilangan fungsi daun\"\n            ],\n            \"rekomendasi\": [\n                \"Pemeliharaan kebersihan kebun teh dengan membuang dan menghancurkan sisa-sisa tanaman yang terinfeksi\",\n                \"Pembersihan gulma di sekitar tanaman teh untuk mengurangi kelembaban dan keberadaan patogen\",\n                \"Pemangkasan dan penjarangan tanaman untuk meningkatkan sirkulasi udara yang baik di antara tanaman teh\",\n                \"Pemberian pupuk yang seimbang dan pengaturan irigasi yang tepat untuk menjaga kekuatan tanaman dan mengurangi stres\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemilihan varietas tanaman teh yang lebih tahan terhadap penyakit Bird Eye Spot jika tersedia\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/514dc8a4-7ed0-4585-8272-bef98249542a-bird_eye_spot_in_tea52.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481cc1ac8e20103221ec241\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_brown_blight\",\n            \"penyakit\": \"brown blight\",\n            \"penyebab\": \"Penyakit Brown Blight pada tanaman teh disebabkan oleh infeksi jamur Exobasidium vexans\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak kecoklatan atau merah kecoklatan pada daun muda tanaman teh\",\n                \"Bercak-bercak tersebut berkembang menjadi lesi berbentuk bercak dengan tepi yang tidak teratur\",\n                \"Lesi terlihat kering dan retak-retak, kemudian daun menjadi kering dan berubah menjadi warna coklat atau merah kemerahan\",\n                \"Infeksi dapat menyebar ke bagian lain tanaman, seperti batang, bunga, dan buah, menyebabkan kerusakan yang serius\"\n            ],\n            \"rekomendasi\": [\n                \"Pemangkasan dan pemotongan tanaman untuk meningkatkan sirkulasi udara yang baik di antara tanaman teh\",\n                \"Pengelolaan kelembaban yang tepat dengan menghindari kondisi yang terlalu lembab\",\n                \"Pemeliharaan kebersihan kebun teh dengan membuang dan menghancurkan sisa-sisa tanaman yang terinfeksi\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pemilihan varietas tanaman teh yang lebih tahan terhadap penyakit Brown Blight jika tersedia\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/b1c5f680-9a05-4803-bc53-b04cc6822751-brown_blight_in_tea26.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6481ccfec8e20103221ec243\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_red_leaf_spot\",\n            \"penyakit\": \"red leaf spot\",\n            \"penyebab\": \"Penyakit Red Leaf Spot pada tanaman teh disebabkan oleh infeksi jamur Mycosphaerella theae\",\n            \"gejala\": [\n                \"Munculnya bercak-bercak merah kecoklatan pada daun tanaman teh\",\n                \"Bercak-bercak tersebut dapat berukuran kecil hingga besar, dengan tepi yang jelas dan berwarna lebih gelap\",\n                \"Bercak-bercak ini bisa terlihat lebih intens pada sisi bawah daun\",\n                \"Infeksi yang parah dapat menyebabkan pengeringan dan kerusakan pada daun, mengurangi produktivitas tanaman\"\n            ],\n            \"rekomendasi\": [\n                \"Pemeliharaan kebersihan kebun teh dengan membuang dan menghancurkan sisa-sisa tanaman yang terinfeksi\",\n                \"Pemangkasan dan penjarangan tanaman untuk meningkatkan sirkulasi udara yang baik di antara tanaman teh\",\n                \"Pemberian pupuk yang seimbang dan pengaturan irigasi yang tepat untuk menjaga kekuatan tanaman dan mengurangi stres\",\n                \"Penggunaan fungisida yang direkomendasikan oleh ahli pertanian, terutama saat risiko infeksi tinggi atau penyakit sudah menyebar luas\",\n                \"Pengendalian gulma yang baik untuk mengurangi kelembaban dan keberadaan patogen\",\n                \"Pemilihan varietas tanaman teh yang lebih tahan terhadap penyakit Red Leaf Spot jika tersedia\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/6a5ac984-b078-46c8-8ba3-44aa2ccc5baa-Tea read leaf 109.jpg\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481cea4c8e20103221ec245\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_bacterial_spot\",\n            \"penyakit\": \"bacterial spot\",\n            \"gejala\": [\n                \"Bercak berair berwarna coklat kehitaman pada daun, buah, dan batang\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida tembaga yang disetujui untuk pengendalian penyakit ini. Oleskan secara rutin sesuai petunjuk pada label\",\n                \"Hindari penyiraman berlebihan, jaga kebersihan area penanaman, dan hindari kontak langsung dengan tanaman yang terinfeksi\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/f7908c33-84ba-4f17-9c11-c756dcc57a03-0cbaca0d-e422-438f-89df-344b493888b8___GCREC_Bact.Sp 5832.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481cee9c8e20103221ec247\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_early_blight\",\n            \"penyakit\": \"early blight\",\n            \"gejala\": [\n                \"Bercak coklat berbentuk bulat pada daun bagian bawah yang kemudian membesar dan mengering\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida yang mengandung tembaga atau bahan aktif lain yang disetujui untuk mengendalikan penyakit ini\",\n                \"Gunakan sistem irigasi tetes untuk menghindari kelembaban berlebih pada daun, pastikan tanaman memiliki sirkulasi udara yang baik, dan jaga kebersihan di sekitar tanaman\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/911aeb8c-7afd-4227-8f7a-c4b75e45736e-0f12e22b-49a9-4d9a-84bc-76bb86ed2a14___RS_Erly.B 9572.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481cf50c8e20103221ec249\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_late_blight\",\n            \"penyakit\": \"late blight\",\n            \"gejala\": [\n                \"Bercak hijau keabu-abuan pada daun, batang, dan buah, kemudian berubah menjadi bercak berwarna coklat gelap yang berair\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida tembaga atau bahan aktif lain yang disetujui. Konsultasikan dengan ahli pertanian mengenai produk yang tepat untuk digunakan\",\n                \"Hindari penyiraman berlebihan, jaga kebersihan area penanaman, dan hindari kontak langsung dengan tanaman yang terinfeksi\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/94b29384-ba2e-4ebd-b263-25ff8a1b2aae-late_blight.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481cfa0c8e20103221ec24b\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_leaf_mold\",\n            \"penyakit\": \"leaf mold\",\n            \"gejala\": [\n                \"Terbentuknya bercak kuning pucat pada daun yang kemudian berkembang menjadi bercak berwarna coklat keabu-abuan dengan tekstur bulu-bulu\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida yang mengandung bahan aktif yang disetujui untuk mengendalikan penyakit ini\",\n                \"Pastikan sirkulasi udara yang baik di sekitar tanaman, hindari penyiraman berlebihan, dan hindari kontak langsung dengan tanaman yang terinfeksi\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/043ff359-0a61-461c-aa60-c4f334a12c1d-leaf_mold.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481d0b0c8e20103221ec24d\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_septoria_leaf\",\n            \"penyakit\": \"septoria leaf\",\n            \"gejala\": [\n                \"Bercak berwarna coklat dengan tepi kuning pada daun yang kemudian berkembang menjadi bercak berukuran besar dengan pusaran hitam di tengahnya\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida yang mengandung bahan aktif seperti azoxystrobin, chlorothalonil, atau mancozeb untuk mengendalikan penyakit ini. Terapkan sesuai petunjuk pada label produk\",\n                \"Jaga kebersihan area penanaman, hindari penyiraman berlebihan, dan hindari penyiramansiap di atas tanaman. Gunakan sistem irigasi tetes untuk menghindari kelembaban berlebih pada daun\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/af7c4d29-c602-49d8-ba2b-d2d8fba1bd37-septoria_leaf.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481d1d7c8e20103221ec24f\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_spider_mites\",\n            \"penyakit\": \"spider mites\",\n            \"gejala\": [\n                \"Daun menjadi kuning, mengering, dan terdapat jaring halus pada permukaan daun. Kutu laba-laba biasanya terlihat di bagian bawah daun\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan insektisida yang mengandung bahan aktif seperti pyrethrin, neem oil, atau sulfur untuk mengendalikan kutu laba-laba. Terapkan sesuai petunjuk pada label produk\",\n                \"Jaga kelembaban di sekitar tanaman, cegah penumpukan gulma yang berlebihan, dan pastikan sirkulasi udara yang baik. Juga, hindari penggunaan insektisida yang berlebihan, karena dapat mengganggu populasi predator alami kutu laba-laba\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/b22dee37-fecf-4d25-8222-495017a2cc42-spider_mites.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481d232c8e20103221ec251\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_target_spot\",\n            \"penyakit\": \"target spot\",\n            \"gejala\": [\n                \"Bercak bulat dengan pusat berwarna coklat tua dan tepi kuning pada daun, batang, dan buah\"\n            ],\n            \"rekomendasi\": [\n                \"Gunakan fungisida yang mengandung bahan aktif seperti chlorothalonil, mancozeb, atau copper hydroxide. Terapkan sesuai petunjuk pada label produk\",\n                \"Jaga kebersihan area penanaman, hindari penyiraman berlebihan, dan hindari kontak langsung dengan tanaman yang terinfeksi. Pastikan juga sirkulasi udara yang baik di sekitar tanaman\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/fd9b9b08-4bb3-45c2-ad4d-695d300eb3e6-target_spot.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"_id\": \"6481d3b1c8e20103221ec253\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_mosaic_virus\",\n            \"penyakit\": \"mosaic virus\",\n            \"gejala\": [\n                \"Daun tanaman terlihat mosaik dengan pola berwarna kuning atau hijau gelap. Pertumbuhan tanaman mungkin terhambat\"\n            ],\n            \"rekomendasi\": [\n                \"Tidak ada obat yang efektif untuk mengobati virus mozaik. Perhatikan dan hapus tanaman yang terinfeksi untuk mencegah penyebaran virus\",\n                \"Hindari menggunakan bibit yang terinfeksi, kontrol serangga vektor seperti kutu daun, dan jaga kebersihan area penanaman\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/2444cdf7-27ca-41ec-a6b4-a567b71d52fc-mosaic_virus.JPG\",\n            \"__v\": 0\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d5d116417c9b75a94d51\",\n            \"tanaman\": \"chili\",\n            \"label\": \"Chili_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau cerah: Daun cabai yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Tekstur yang keras: Daun cabai yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air\",\n                \"Tidak ada hama atau penyakit: Daun cabai yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman cabai perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman\",\n                \"Beri pupuk secara teratur: Tanaman cabai perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman cabai\",\n                \"Berikan sinar matahari penuh: Tanaman cabai membutuhkan sinar matahari penuh untuk tumbuh subur. Jika mereka tidak mendapatkan cukup sinar matahari, mereka mungkin tidak akan menghasilkan banyak cabai atau cabai tidak akan terlalu panas\",\n                \"Lindungi dari hama dan penyakit: Tanaman cabai rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu\",\n                \"Beri mulsa di sekitar tanaman: Mulsa membantu menjaga kelembapan dan menekan gulma\",\n                \"Pangkas tanaman: Pemangkasan membantu menjaga tanaman tetap sehat dan produktif\",\n                \"Rotasi tanaman: Merotasi tanaman membantu mencegah penumpukan hama dan penyakit\",\n                \"Dengan mengikuti tips-tips ini, Anda dapat membantu tanaman cabai Anda tumbuh subur dan menghasilkan panen yang melimpah\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/chili.jpg\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d71516417c9b75a94d54\",\n            \"tanaman\": \"guava\",\n            \"label\": \"Guava_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun jambu biji yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Tekstur keras: Daun jambu biji yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air\",\n                \"Tidak ada hama atau penyakit: Daun jambu biji yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman jambu biji perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman\",\n                \"Beri pupuk secara teratur: Tanaman jambu biji perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman jambu biji\",\n                \"Berikan sinar matahari penuh: Tanaman jambu biji membutuhkan sinar matahari penuh untuk tumbuh subur. Jika tidak mendapatkan cukup sinar matahari, mereka mungkin tidak akan menghasilkan banyak buah atau buahnya tidak akan semanis mungkin\",\n                \"Lindungi dari hama dan penyakit: Tanaman jambu biji rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/guava.jpeg\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d7c416417c9b75a94d55\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun mangga yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Tekstur yang keras: Daun mangga yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air\",\n                \"Tidak ada hama atau penyakit: Daun mangga yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya\",\n                \"Pertumbuhan baru: Tanaman mangga yang sehat akan memiliki pertumbuhan baru yang berwarna hijau lebih terang dari daun yang lebih tua\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman mangga perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman\",\n                \"Beri pupuk secara teratur: Tanaman mangga perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman mangga\",\n                \"Berikan sinar matahari penuh: Tanaman mangga membutuhkan sinar matahari penuh untuk tumbuh subur. Jika mereka tidak mendapatkan sinar matahari yang cukup, mereka mungkin tidak akan menghasilkan banyak mangga atau mangga yang dihasilkan tidak akan semanis mangga\",\n                \"Lindungi dari hama dan penyakit: Tanaman mangga rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/mango.jpg\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d89116417c9b75a94d56\",\n            \"tanaman\": \"tomato\",\n            \"label\": \"Tomato_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua. Daun tomat yang sehat berwarna hijau tua. Jika daun menguning, itu bisa menjadi tanda kekurangan nutrisi\",\n                \"Permukaan halus dan mengkilap. Daun tomat yang sehat memiliki permukaan yang halus dan mengkilap. Jika daun berkerut atau terlihat kusam, itu bisa menjadi tanda stres air\",\n                \"Tidak ada bintik atau noda. Daun tomat yang sehat harus bebas dari bintik-bintik atau noda. Jika daun memiliki bintik-bintik atau noda, itu bisa menjadi tanda penyakit\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur. Tanaman tomat membutuhkan sekitar 1 inci air per minggu. Siramlah dengan dalam dan lebih jarang, bukan dengan dangkal dan lebih sering\",\n                \"Beri pupuk secara teratur. Tanaman tomat membutuhkan pupuk yang seimbang, seperti pupuk 10-10-10. Beri pupuk setiap 2-3 minggu selama musim tanam\",\n                \"Buang tunas pengisap. Anakan adalah tunas yang tumbuh dari persimpangan batang dan daun. Anakan harus dibuang secara teratur untuk mendorong tanaman agar fokus memproduksi buah\",\n                \"Dukung tanaman. Tanaman tomat bisa tumbuh cukup besar, jadi penting untuk menyangga tanaman dengan tiang atau sangkar. Hal ini akan membantu mencegah tanaman terjatuh dan juga membantu meningkatkan sirkulasi udara di sekitar tanaman\",\n                \"Pengendalian hama dan penyakit. Tanaman tomat rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman secara teratur dan mengambil tindakan untuk mengendalikan masalah yang ditemukan\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/tomato.JPG\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d96516417c9b75a94d57\",\n            \"tanaman\": \"potato\",\n            \"label\": \"Potato_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun kentang yang sehat berwarna hijau tua. Jika daunnya menguning, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Permukaan halus dan mengkilap: Daun kentang yang sehat memiliki permukaan yang halus dan mengkilap. Jika daun berkerut atau terlihat kusam, itu bisa menjadi tanda stres air\",\n                \"Tidak ada bintik atau noda: Daun kentang yang sehat harus bebas dari bintik-bintik atau noda. Jika daun memiliki bintik-bintik atau noda, itu bisa menjadi tanda penyakit\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman kentang membutuhkan sekitar 1 inci air per minggu. Siramlah dengan dalam dan lebih jarang, daripada dangkal dan lebih sering\",\n                \"Beri pupuk secara teratur: Tanaman kentang membutuhkan pupuk yang seimbang, seperti pupuk 10-10-10. Berikan pupuk setiap 2-3 minggu selama musim tanam\",\n                \"Gundukkan tanah: Saat tanaman kentang tumbuh, gundukkan tanah di sekelilingnya. Hal ini akan membantu melindungi umbi dari sinar matahari dan hama serta penyakit\",\n                \"Sangga tanaman: Tanaman kentang dapat tumbuh cukup besar, jadi penting untuk menyangga tanaman dengan tiang atau kurungan. Hal ini akan membantu mencegah tanaman terjatuh dan juga membantu meningkatkan sirkulasi udara di sekitar tanaman\",\n                \"Pengendalian hama dan penyakit: Tanaman kentang rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman secara teratur dan mengambil tindakan untuk mengendalikan masalah yang ditemukan\"\n            ],\n            \"image\": \"\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481d9dc16417c9b75a94d58\",\n            \"tanaman\": \"corn\",\n            \"label\": \"Corn_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun jagung yang sehat berwarna hijau tua. Jika daunnya menguning, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Permukaan halus dan mengkilap: Daun jagung yang sehat memiliki permukaan yang halus dan mengkilap. Jika daun berkerut atau terlihat kusam, itu bisa menjadi tanda stres air\",\n                \"Tidak ada bintik atau noda: Daun jagung yang sehat harus bebas dari bintik-bintik atau noda. Jika daun memiliki bintik-bintik atau noda, itu bisa menjadi tanda penyakit\",\n                \"Daun jagung yang sehat memiliki panjang sekitar 6-12 inci dan lebar 2-4 inci\",\n                \"Daunnya tersusun bergantian di sepanjang batang\",\n                \"Urat pada daun sejajar dan membentang dari pangkal daun ke ujung\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman jagung membutuhkan sekitar 1 inci air per minggu. Siramlah dengan dalam dan lebih jarang, daripada dangkal dan lebih sering\",\n                \"Beri pupuk secara teratur: Tanaman jagung membutuhkan pupuk yang seimbang, seperti pupuk 10-10-10. Berikan pupuk setiap 2-3 minggu selama musim tanam\",\n                \"Bersihkan gulma: Gulma bersaing dengan tanaman jagung untuk mendapatkan air, nutrisi, dan sinar matahari. Bersihkan gulma secara teratur untuk memberi tanaman jagung Anda peluang sukses terbaik\",\n                \"Kontrol pengisap: Tanaman jagung menghasilkan anakan, yaitu tunas yang tumbuh dari pangkal tanaman. Pengisap harus dibuang secara teratur untuk mendorong tanaman agar fokus memproduksi tongkol jagung\",\n                \"Pengendalian hama dan penyakit: Tanaman jagung rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman secara teratur dan mengambil tindakan untuk mengendalikan masalah yang ditemukan\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/corn.jpg\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481da9716417c9b75a94d59\",\n            \"tanaman\": \"tea\",\n            \"label\": \"Tea_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun teh yang sehat berwarna hijau tua. Jika daunnya menguning, itu bisa menjadi tanda kekurangan nutrisi\",\n                \"Permukaan halus dan mengkilap: Daun teh yang sehat memiliki permukaan yang halus dan mengkilap. Jika daunnya berkerut atau terlihat kusam, itu bisa menjadi tanda stres air\",\n                \"Tidak ada bintik atau noda: Daun teh yang sehat harus bebas dari bintik-bintik atau noda. Jika daun memiliki bintik-bintik atau noda, itu bisa menjadi tanda penyakit\",\n                \"Daun teh yang sehat memiliki panjang sekitar 1-2 inci dan lebar 1/2-1 inci\",\n                \"Daunnya tersusun bergantian di sepanjang batang\",\n                \"Urat-urat pada daun sejajar dan membentang dari pangkal daun ke ujung\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman teh membutuhkan sekitar 1 inci air per minggu. Siramlah dengan dalam dan lebih jarang, daripada dangkal dan lebih sering\",\n                \"Beri pupuk secara teratur: Tanaman teh membutuhkan pupuk yang seimbang, seperti pupuk 10-10-10. Berikan pupuk setiap 2-3 minggu selama musim tanam\",\n                \"Pemangkasan: Tanaman teh harus dipangkas secara teratur untuk mendorong pertumbuhan baru dan mencegah tanaman menjadi terlalu besar\",\n                \"Pengendalian hama dan penyakit: Tanaman teh rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman secara teratur dan mengambil tindakan untuk mengendalikan masalah yang ditemukan\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/tea.jpg\"\n        },\n        {\n            \"penyebab\": null,\n            \"gejala\": [],\n            \"rekomendasi\": [],\n            \"_id\": \"6481db0d16417c9b75a94d5a\",\n            \"tanaman\": \"cassava\",\n            \"label\": \"Cassava_healthy\",\n            \"penyakit\": \"healthy\",\n            \"ciriDaunSehat\": [\n                \"Warna hijau tua: Daun singkong yang sehat berwarna hijau tua. Jika daunnya menguning, bisa jadi itu adalah tanda kekurangan nutrisi\",\n                \"Permukaan halus dan mengkilap: Daun singkong yang sehat memiliki permukaan yang halus dan mengkilap. Jika daun berkerut atau terlihat kusam, itu bisa menjadi tanda stres air\",\n                \"Tidak ada bintik atau noda: Daun singkong yang sehat harus bebas dari bercak atau noda. Jika daun memiliki bintik-bintik atau noda, itu bisa menjadi tanda penyakit\",\n                \"Daun singkong yang sehat memiliki panjang sekitar 3-6 inci dan lebar 2-4 inci\",\n                \"Daunnya tersusun bergantian di sepanjang batang\",\n                \"Urat pada daun sejajar dan membentang dari pangkal daun ke ujung\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman singkong membutuhkan sekitar 1 inci air per minggu. Siramlah dengan dalam dan lebih jarang, bukan dengan dangkal dan lebih sering\",\n                \"Beri pupuk secara teratur: Tanaman singkong membutuhkan pupuk yang seimbang, seperti pupuk 10-10-10. Lakukan pemupukan setiap 2-3 minggu selama musim tanam\",\n                \"Bersihkan gulma: Gulma bersaing dengan tanaman singkong untuk mendapatkan air, nutrisi, dan sinar matahari. Bersihkan gulma secara teratur untuk memberikan tanaman singkong Anda peluang terbaik untuk sukses\",\n                \"Pengendalian hama dan penyakit: Tanaman singkong rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman secara teratur dan mengambil tindakan untuk mengendalikan masalah yang ditemukan\",\n                \"Pancang tanaman: Tanaman singkong bisa tumbuh cukup besar, jadi penting untuk memancangnya dengan tiang atau kurungan agar tidak roboh\",\n                \"Panen: Daun singkong dapat dipanen saat masih muda dan empuk. Jika daunnya terlalu tua, daunnya akan keras dan pahit\"\n            ],\n            \"image\": \"https://storage.googleapis.com/tamara-storage/healthy/cassava.jpg\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Get All Recommendation",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/recommendation",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"recommendation"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"818-gbfWhLLbkg6vkBP4sMK+32i+il4\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "794a4ac01f90de35cc1b5e6d28f5991c;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jun 2023 07:44:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2072"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get all recommendations\",\n    \"data\": [\n        {\n            \"_id\": \"6486cce164f3a2b0cff90413\",\n            \"tanaman\": \"mango\",\n            \"label\": \"Mango_healthy\",\n            \"penyakit\": \"healthy\",\n            \"hasil\": {\n                \"ciriDaunSehat\": [\n                    \"Warna hijau cerah: Daun cabai yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi.\",\n                    \"Tekstur yang keras: Daun cabai yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air.\",\n                    \"Tidak ada hama atau penyakit: Daun cabai yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya.\"\n                ],\n                \"tips\": [\n                    \"Siram secara teratur: Tanaman cabai perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman.\",\n                    \"Beri pupuk secara teratur: Tanaman cabai perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman cabai.\",\n                    \"Berikan sinar matahari penuh: Tanaman cabai membutuhkan sinar matahari penuh untuk tumbuh subur. Jika mereka tidak mendapatkan cukup sinar matahari, mereka mungkin tidak akan menghasilkan banyak cabai atau cabai tidak akan terlalu panas.\",\n                    \"Lindungi dari hama dan penyakit: Tanaman cabai rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu.\",\n                    \"Beri mulsa di sekitar tanaman: Mulsa membantu menjaga kelembapan dan menekan gulma.\",\n                    \"Pangkas tanaman: Pemangkasan membantu menjaga tanaman tetap sehat dan produktif.\",\n                    \"Rotasi tanaman: Merotasi tanaman membantu mencegah penumpukan hama dan penyakit.\",\n                    \"Dengan mengikuti tips-tips ini, Anda dapat membantu tanaman cabai Anda tumbuh subur dan menghasilkan panen yang melimpah.\"\n                ]\n            },\n            \"image\": \"https://storage.googleapis.com/tamara-storage/4a8f68b8-383f-4651-8098-aa3c5bab647a-mango.jpg\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Recommendation By Keyword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/recommendation?search=tomato",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"recommendation"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "tomato"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search Recommendation By Keyword",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/recommendation?search=mango",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"recommendation"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "mango"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "926"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39e-aUL1MaX5AUsdMfKcTYjQXp4Bp/4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jun 2023 01:32:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get data with keyword mango\",\n    \"data\": [\n        {\n            \"_id\": \"647d3af2be7bb40f30a5ede0\",\n            \"fruit_name\": \"Mango\",\n            \"class\": \"Mango_sooty_mold_disease\",\n            \"recommendation\": \"Kami merekomendasikan penerapan kontrol organik pada tahap-tahap awal penyakit atau ketika tanaman mendekati panen. Pada stadium penyakit yang lebih lanjut, gunakan kontrol kimiawi. Mencapur atau memberikan produk-produk berbeda pada saat yang bersamaan tidak di rekomendasikan.\",\n            \"characteristics\": \"Daun menguning yang dimulai dari tepian, Pembuluh daun utama tetap bewarna hijau tua, Daun mengering, Pertumbuhan terhambat\",\n            \"images\": [\n                \"https://storage.googleapis.com/tamara-bucket/9da418b1-0992-49fb-b554-24a9ac6a37a1-kurang-kalium-1.jpg\",\n                \"https://storage.googleapis.com/tamara-bucket/20a9f0b1-24de-4fea-97ed-35c78b52fc63-kurang-kalium-2.jpg\",\n                \"https://storage.googleapis.com/tamara-bucket/e1435299-3e88-4049-b49c-6fa77c2ebef3-kurang-kalium-3.jpeg\"\n            ],\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Recommendation By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/recommendation/64804216b23077260d526896",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"recommendation",
+								"64804216b23077260d526896"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/recommendation/a320545e-f32e-4852-a583-dad0e1f87b9a",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"recommendation",
+										"a320545e-f32e-4852-a583-dad0e1f87b9a"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "91"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5b-d1tNL/xz1KMS0zVnSeD/fZ/ygPI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 Jun 2023 07:52:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to delete recommendation with ID a320545e-f32e-4852-a583-dad0e1f87b9a\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk mengisi data-data rekomendasi untuk kebutuhan hasil prediksi tim machine learning. Disini tim Machine Learning dapat menambahkan, mencari, melihat semua dan menghapus data-data rekomendasi.\n\n> ***Endpoint ini hanya bisa dipakai oleh tim Machine Learning untuk mengisi data rekomendasi***"
+		}
+	]
+}

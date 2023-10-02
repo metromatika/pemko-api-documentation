@@ -1,0 +1,2408 @@
+{
+	"info": {
+		"_postman_id": "0fdb8d7e-8958-4bec-bbfa-8a841fe58518",
+		"name": "TAMARA",
+		"description": "Dokumentasi Restfull API untuk Client atau Aplikasi TAMARA. API masih dalam ***lingkungan pengembangan***, harap ***tidak melakukan request*** pada API ini dan ***tidak menekan tombol \"Run in Postman\"***, karena Anda hanya akan mendapatkan pesan error jika mencobanya, sebagai simulasi Anda bisa melihat request body, response, header, dan ketentuan lainnya pada setiap endpoint yang tersedia berdasarkan tiap-tiap dokumentasinya.\n\n### BASE URL: `https://tamara-api-6jw5kieabq-et.a.run.app`\n\n> ***Dokumentasi bersifat rahasia, tolong jangan disebar luaskan!!!***",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27401477"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "#### Request Body\n\n*   `fullname` as `string` ***(required)***\n*   `email` as `string`, must be unique ***(required)***\n*   `password` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-lyc8SejFtW5Yg8bHM14ZkLV/kAw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:38:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Account has been successfully created\"\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullname\": \"Budi Sanjaya\",\r\n    \"email\": \"budisanjaya@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/register",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-2DLSLK8mweosWO6rah7gZUvDgWM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:06:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"\\\"password\\\" is required\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const accessToken = pm.response.json().accessToken;\r",
+									"\r",
+									"pm.environment.set(\"accessToken\", accessToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{budiEmail}}\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "#### Request Body\n\n*   `email` as `string` ***(required)***\n*   `password` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"budisanjaya@gmail.com\",\r\n    \"password\": \"passwordIniAman\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/auth/login",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "327"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"147-aw7SgOgUpIF6P+J0ecsfioFrlSI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:40:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Budi Sanjaya has been login successfully\",\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzOTJkMzc0LTNkYTktNDhhYi1hNDBjLWI4ZGI2M2Q0NTY3YSIsImZ1bGxuYW1lIjoiQnVkaSBTYW5qYXlhIiwiZW1haWwiOiJidWRpc2FuamF5YUBnbWFpbC5jb20iLCJwaG90byI6IiIsImlhdCI6MTY4NDI0NDQzMX0.9r5O99UpQ5lCcPpB3X4j0xrqHCCRK8EG8Xg1HZDHIRU\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan aktivitas authentication dan sebagai landasan authorization pada server terhadap client, endpoint-endpoint ini diperlukan untuk dilewati pengguna agar client dapat menggunakan layanan lain dari server yang membutuhkan pengguna untuk login.\n\n> ***Endpoint ini bisa dipakai oleh user yang belum login***"
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "Get User Data Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-uRddfk3au/1mh93kCX4msRaL7Ow\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:45:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get user data\",\n    \"data\": {\n        \"id\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\",\n        \"fullname\": \"Budi Sanjaya\",\n        \"email\": \"budisanjaya@gmail.com\",\n        \"photo\": \"\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan perubahan dan pengambilan informasi terkait user yang login pada client dan ter-autorisasi pada server.\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PREDICTION",
+			"item": [
+				{
+					"name": "Get All Predict User Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/predict",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"predict"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/predict",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2164"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"874-AT8BdCWGNhChnc2sUyTN1BUDKh4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 03:55:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get your predict\",\n    \"data\": [\n        {\n            \"_id\": \"6487148ab21f3ea7e36680dc\",\n            \"recommendationId\": \"6486db2a64f3a2b0cff90436\",\n            \"userId\": \"648139b60a147aba89df216d\",\n            \"createdAt\": \"2023-06-12T12:50:18.029Z\",\n            \"updatedAt\": \"2023-06-12T12:50:18.029Z\",\n            \"__v\": 0,\n            \"recommendation\": {\n                \"_id\": \"6486db2a64f3a2b0cff90436\",\n                \"tanaman\": \"mango\",\n                \"label\": \"Mango_sooty_mold_disease\",\n                \"penyakit\": \"sooty mold disease\",\n                \"hasil\": {\n                    \"gejala\": [\n                        \"Permukaan daun, ranting, dan buah ditutupi dengan lapisan hitam atau kelabu yang terlihat seperti jelaga.\",\n                        \"Lapisan hitam ini sebenarnya adalah koloni jamur yang tumbuh di atas cairan manis yang dikeluarkan oleh serangga penghisap.\",\n                        \"Infeksi Sooty Mould pada mangga biasanya tidak merusak tanaman secara langsung, tetapi dapat menghambat proses fotosintesis dan mengurangi hasil panen.\"\n                    ],\n                    \"pengobatan\": [\n                        \"Kontrol serangga penghisap dengan menggunakan insektisida yang direkomendasikan oleh ahli pertanian.\",\n                        \"Pemantauan secara teratur untuk deteksi dini serangga penghisap dan tindakan pengendalian yang tepat.\",\n                        \"Pembersihan daun dan permukaan tanaman yang terinfeksi menggunakan air atau larutan sabun lembut untuk menghilangkan lapisan Sooty Mould.\",\n                        \"Menghilangkan atau mengendalikan sumber serangga penghisap yang dapat menyebabkan cairan manis, seperti kutu daun, ulat pengisap, atau tungau.\",\n                        \"Peningkatan ventilasi dan pencahayaan di kebun untuk mengurangi kondisi yang menguntungkan bagi pertumbuhan jamur.\",\n                        \"Memperbaiki kebersihan umum kebun dengan menghilangkan serasah, gulma, dan sisa-sisa tanaman yang dapat menjadi tempat berkembang biak bagi serangga penghisap.\"\n                    ],\n                    \"pengendalian\": [\n                        \"Pupuk Organik: Merek-merek pupuk organik yang umumnya digunakan termasuk Organixx, Bokashi, atau Nature's Care.\",\n                        \"Pupuk Kimia: Merek-merek pupuk kimia yang umum digunakan termasuk NPK Grow, Scotts Miracle-Gro, atau YaraLiva.\"\n                    ],\n                    \"penyebab\": \"Sooty Mould pada mangga disebabkan oleh pertumbuhan jamur pada cairan manis yang dikeluarkan oleh serangga penghisap, seperti kutu daun atau ulat pengisap.\"\n                },\n                \"image\": \"https://storage.googleapis.com/tamara-storage/923891a2-deab-4fb5-9809-fb8e7df8f77e-IMG_20211108_120906 (Custom).jpg\",\n                \"__v\": 0\n            },\n            \"id\": \"6487148ab21f3ea7e36680dc\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Predict Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "plant_name",
+									"value": "mango",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"description": "Required",
+									"type": "file",
+									"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/mangga-sakit.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/predict",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"predict"
+							]
+						},
+						"description": "#### Request Body\n\n*   `images` as `file` , must be a valid image file, max 1MB ***(required)***\n*   `plant_name` as `string` ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "plant_name",
+											"value": "mango",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"description": "Required",
+											"type": "file",
+											"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/healthy/mango.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/predict",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"predict"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"806-83r6q3puDyosh/XdzwuzK0YYq8g\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "367cdb9c9b526e79853980886b8acfed;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Jun 2023 07:48:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2054"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to predict\",\n    \"data\": {\n        \"_id\": \"6486cce164f3a2b0cff90413\",\n        \"tanaman\": \"mango\",\n        \"label\": \"Mango_healthy\",\n        \"penyakit\": \"healthy\",\n        \"hasil\": {\n            \"ciriDaunSehat\": [\n                \"Warna hijau cerah: Daun cabai yang sehat berwarna hijau tua. Jika daun berwarna kuning atau pucat, bisa jadi itu adalah tanda kekurangan nutrisi.\",\n                \"Tekstur yang keras: Daun cabai yang sehat memiliki tekstur yang keras saat disentuh. Jika daunnya lunak atau layu, itu bisa menjadi tanda kelebihan air atau kekurangan air.\",\n                \"Tidak ada hama atau penyakit: Daun cabai yang sehat harus bebas dari hama dan penyakit. Jika Anda melihat tanda-tanda hama atau penyakit, penting untuk segera mengobatinya.\"\n            ],\n            \"tips\": [\n                \"Siram secara teratur: Tanaman cabai perlu disiram secara teratur, tetapi berhati-hatilah untuk tidak menyiramnya secara berlebihan. Penyiraman yang berlebihan dapat menyebabkan busuk akar, yang dapat membunuh tanaman.\",\n                \"Beri pupuk secara teratur: Tanaman cabai perlu dipupuk secara teratur, terutama selama musim tanam. Anda dapat menggunakan pupuk berimbang atau pupuk yang dirancang khusus untuk tanaman cabai.\",\n                \"Berikan sinar matahari penuh: Tanaman cabai membutuhkan sinar matahari penuh untuk tumbuh subur. Jika mereka tidak mendapatkan cukup sinar matahari, mereka mungkin tidak akan menghasilkan banyak cabai atau cabai tidak akan terlalu panas.\",\n                \"Lindungi dari hama dan penyakit: Tanaman cabai rentan terhadap berbagai hama dan penyakit. Penting untuk memeriksa tanaman Anda secara teratur untuk mengetahui adanya tanda-tanda masalah dan segera mengobatinya jika Anda melihat sesuatu.\",\n                \"Beri mulsa di sekitar tanaman: Mulsa membantu menjaga kelembapan dan menekan gulma.\",\n                \"Pangkas tanaman: Pemangkasan membantu menjaga tanaman tetap sehat dan produktif.\",\n                \"Rotasi tanaman: Merotasi tanaman membantu mencegah penumpukan hama dan penyakit.\",\n                \"Dengan mengikuti tips-tips ini, Anda dapat membantu tanaman cabai Anda tumbuh subur dan menghasilkan panen yang melimpah.\"\n            ]\n        },\n        \"image\": \"https://storage.googleapis.com/tamara-storage/4a8f68b8-383f-4651-8098-aa3c5bab647a-mango.jpg\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint untuk melakukan aktivitas menjalankan model terhadap gambar tanaman yang dikirimkan oleh client pada server untuk mendapatkan hasil analisis dan rekomendasi dari gambar tanaman yang dikirimkan***.***\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "PRODUCTION",
+			"item": [
+				{
+					"name": "Create Analysis Production",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"jenis_tanaman\": \"Padi\",\r\n  \"luas_lahan\": 500,\r\n  \"hasil_panen\": 500,\r\n  \"harga_pasaran\": 100000,\r\n  \"biaya\": {\r\n    \"sewa_lahan\": 0,\r\n    \"benih\": 1000000,\r\n    \"peralatan_pertanian\": 1000000,\r\n    \"pemupukan\": 500000,\r\n    \"obat_pertanian\": 500000,\r\n    \"transportasi\": 0,\r\n    \"kemasan_hasil_panen\": 0,\r\n    \"upah_kerja\": 0,\r\n    \"lain\": 0\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/analyze",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"analyze"
+							]
+						},
+						"description": "#### Request Body\n\n*   `jenis_tanaman` : `string` ***(required)***\n*   `luas_lahan` : `integer` ***(required)***\n*   `hasil_panen` : `integer` ***(required)*** \n*   `harga_pasaran` : `integer` ***(required)***\n*   `biaya` : `object` ***(required)***\n    *   `sewa_lahan` : `integer` ***(required)***\n    *   `benih` : `integer` ***(required)***\n    *   `peralatan_pertanian` : `integer` ***(required)***\n    *   `pemupukan` : `integer` ***(required)***\n    *   `obat_pertanian` : `integer` ***(required)***\n    *   `transportasi` : `integer` ***(required)***\n    *   `kemasan_hasil_panen` : `integer` ***(required)***\n    *   `upah_kerja` : `integer` ***(required)***\n    *   `lain` : `integer` ***(required)***"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"jenis_tanaman\": \"Padi\",\r\n    \"luas_lahan\": 500,\r\n    \"hasil_panen\": 500,\r\n    \"harga_pasaran\": 100000,\r\n    \"biaya\": {\r\n      \"sewa_lahan\": 0,\r\n      \"benih\": 1000000,\r\n      \"peralatan_pertaninan\": 1000000,\r\n      \"pemupukan\": 500000,\r\n      \"obat_pertanian\": 500000,\r\n      \"transportasi\": 0,\r\n      \"kemasan_hasil_panen\": 0,\r\n      \"upah_kerja\": 0,\r\n      \"lain\": 0\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/analyze",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"analyze"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "324"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"144-ZxkI9/KhvFj7o2T/6yFC2hgFKOQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:12:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get analysis results\",\n    \"data\": {\n        \"id\": \"ad699b06-a2c4-4a9c-a3df-da1f8ad74d4a\",\n        \"tanggal\": \"2023-05-16T14:12:35.385Z\",\n        \"jenis_komoditas\": \"Padi\",\n        \"jumlah_panen\": 500,\n        \"produktivitas\": 10000,\n        \"total_biaya_produksi\": 3000000,\n        \"pendapatan\": 50000000,\n        \"keuntungan\": 47000000,\n        \"userId\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Analysis Production For User Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/analyze",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"analyze"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/analyze",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"analyze"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "367"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16f-8rfXuW5vFXFAaH7M64kVQi1rU8w\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:12:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get analysis with userId 0392d374-3da9-48ab-a40c-b8db63d4567a\",\n    \"data\": [\n        {\n            \"id\": \"ad699b06-a2c4-4a9c-a3df-da1f8ad74d4a\",\n            \"tanggal\": \"2023-05-16T14:12:35.385Z\",\n            \"jenis_komoditas\": \"Padi\",\n            \"jumlah_panen\": 500,\n            \"produktivitas\": 10000,\n            \"total_biaya_produksi\": 3000000,\n            \"pendapatan\": 50000000,\n            \"keuntungan\": 47000000,\n            \"userId\": \"0392d374-3da9-48ab-a40c-b8db63d4567a\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk mendapatkan hasil analisis produktivitas pengguna terhadap tanaman. Terdapat dua enpoint penting disini yaitu membuat analisis produktivitas dan mendapatkan seluruh rekaman data analisis pengguna yang login.\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "WEATHER",
+			"item": [
+				{
+					"name": "Get Weather By Location (In Dashboard)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/weather?lat=3.5594745&lon=98.692856",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "3.5594745"
+								},
+								{
+									"key": "lon",
+									"value": "98.692856"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEnpoint ini berguna untuk mengambil data cuaca berdasarkan nilai ***lat*** dan ***lon***, yang didapatkan dari ***GPS*** pengguna, endpoint ini hanya akan mengirimkan 1 buah data yang memiliki waktu yang telah disesuaikan dengan waktu saat ini. Endpoint ini cocok untuk mendapatkan ***data cuaca saat ini*** pada menu ***dashboard***\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/weather?lat=3.666810&lon=98.671230",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "3.666810"
+										},
+										{
+											"key": "lon",
+											"value": "98.671230"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "381"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"17d-ljl208nhlW8xbe3dnXNRswCeWr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 01:05:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater from location\",\n    \"data\": {\n        \"jamCuaca\": \"2023-06-14 12:00:00\",\n        \"kodeCuaca\": \"3\",\n        \"cuaca\": \"Berawan\",\n        \"humidity\": \"85\",\n        \"tempC\": \"28\",\n        \"tempF\": \"82\",\n        \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\",\n        \"id\": \"501580\",\n        \"propinsi\": \"SumateraUtara\",\n        \"kota\": \"Kota Medan\",\n        \"kecamatan\": \"Medan\",\n        \"lat\": \"3.666810\",\n        \"lon\": \"98.671230\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather By Keyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/weather?search=medan",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "medan"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEndpoint ini berguna untuk mencari seluruh daerah yang terdaftar di database berdasarkan ***keyword*** yang diberikan pengguna. Endpoint ini mungkin berguna untuk fitur pencarian cuaca pada daerah lain, dimana nantinya client akan menampilkan seluruh list daerah yang sesuai dengan ***keyword*** yang dimasukkan, lalu memberikan *id* atau ***lat*** dan ***lon*** ke server untuk memberikan detail dari daerah yang ia ***klik*** atau ***tekan.***\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{URL}}/weather?search=medan",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "medan"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"130-S5i4k0qyyx2zBqj1+EBpdTl2tu4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 May 2023 05:36:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater with keyword medan\",\n    \"data\": [\n        {\n            \"id\": \"501235\",\n            \"propinsi\": \"JawaBarat\",\n            \"kota\": \"Kab. Sumedang\",\n            \"kecamatan\": \"Sumedang\",\n            \"lat\": \"-6.850078\",\n            \"lon\": \"107.926941\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather Detail By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/detail/501580",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"detail",
+								"501580"
+							]
+						},
+						"description": "#### Deskripsi\n\nEndpoint ini dapat berguna apabila digunakan bersama dengan endpoint ***get weather by keyword***, yang mana setelah pengguna menekan daerah yang ia pilih, maka client mengirimkan request ke endpoint ini.\n\n#### Params\n\n*   `url` : `https://tamara-api-6jw5kieabq-et.a.run.app/weather/[weatherId]`\n*   `weatherId` : `501580`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/weather/detail/501580",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather",
+										"detail",
+										"501580"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1419"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"58b-08qr+TajA3QR/dVbJqX2JUVmQvw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Jun 2023 03:36:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater data with ID: 501580\",\n    \"data\": [\n        {\n            \"jamCuaca\": \"2023-06-13 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"100\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 06:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"65\",\n            \"tempC\": \"33\",\n            \"tempF\": \"91\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"27\",\n            \"tempF\": \"81\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-13 18:00:00\",\n            \"kodeCuaca\": \"60\",\n            \"cuaca\": \"Hujan Ringan\",\n            \"humidity\": \"90\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Pastikan drainase yang baik dan lindungi tanaman dari genangan air.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"28\",\n            \"tempF\": \"82\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"jamCuaca\": \"2023-06-14 18:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Weather Detail By Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/weather/detail?lat=3.5594745&lon=98.692856",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"weather",
+								"detail"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "3.5594745"
+								},
+								{
+									"key": "lon",
+									"value": "98.692856"
+								}
+							]
+						},
+						"description": "#### Deskripsi\n\nEnpoint ini berfungsi untuk mendapatkan detail dari data cuaca saat ini yang ada pada menu ***dashboard***, apabila menu cuaca saat ini di tekan request ke endpoint ini dengan mengirimkan data berupa ***lat*** dan ***lon*** dari pengguna untuk mendapatkan data detail cuaca setiap 6 jam ke depan.\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/weather/detail?lat=3.666810&lon=98.671230",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"weather",
+										"detail"
+									],
+									"query": [
+										{
+											"key": "lat",
+											"value": "3.666810"
+										},
+										{
+											"key": "lon",
+											"value": "98.671230"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2300"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8fc-rjeZXcGbNoK1B3641iotfzOE+Bw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 01:06:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get wheater from location\",\n    \"data\": [\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-14 00:00:00\",\n            \"kodeCuaca\": \"1\",\n            \"cuaca\": \"Cerah Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman dan periksa kelembapan tanah.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-14 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"85\",\n            \"tempC\": \"28\",\n            \"tempF\": \"82\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-14 18:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"95\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-15 00:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"100\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-15 06:00:00\",\n            \"kodeCuaca\": \"60\",\n            \"cuaca\": \"Hujan Ringan\",\n            \"humidity\": \"65\",\n            \"tempC\": \"34\",\n            \"tempF\": \"93\",\n            \"recommendation\": \"Pastikan drainase yang baik dan lindungi tanaman dari genangan air.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-15 12:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"90\",\n            \"tempC\": \"25\",\n            \"tempF\": \"77\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        },\n        {\n            \"id\": \"501580\",\n            \"propinsi\": \"SumateraUtara\",\n            \"kota\": \"Kota Medan\",\n            \"kecamatan\": \"Medan\",\n            \"lat\": \"3.666810\",\n            \"lon\": \"98.671230\",\n            \"jamCuaca\": \"2023-06-15 18:00:00\",\n            \"kodeCuaca\": \"3\",\n            \"cuaca\": \"Berawan\",\n            \"humidity\": \"100\",\n            \"tempC\": \"24\",\n            \"tempF\": \"75\",\n            \"recommendation\": \"Menyiram tanaman, perhatikan kelembapan tanah, dan sirkulasi udara yang baik.\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk mendapatkan prediksi cuaca di suatu tempat berdasarkan beberapa parameter, yaitu ***lat*** dan ***lon***, yang didapat dari client untuk menentukan tempat keberadaan pengguna.\n\n> ***Endpoint ini bisa dipakai oleh user yang belum login.***"
+		},
+		{
+			"name": "DISCUSSION",
+			"item": [
+				{
+					"name": "Create New Discussion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "question",
+									"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Padi",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/D:/dummy-image/TAMARA/padi.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/questions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "#### Request Body\n\n*   `question` as `string` ***(required)***\n*   `description` as `string` ***(required)***\n*   `category` as `string` ***(required)***\n*   `picture` as `file`, must be a valid image file, max size 1MB ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Padi",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": "/D:/dummy-image/TAMARA/plant-6.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/questions",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-ADXoAiFElv28oHQYLyhApu2WpCc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 13:51:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to create new question\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Discussions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							]
+						},
+						"description": "#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"316-nc9+CK8hxtEBTBolbtNZ/NKRRQk\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "ad5f737b91f16cc0272c84d48d60d36e"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:46:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "790"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get all questions\",\n    \"data\": [\n        {\n            \"_id\": \"64805207ad1b1ec16330f752\",\n            \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n            \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n            \"category\": \"Padi\",\n            \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n            \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"64805207ad1b1ec16330f752\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Questions By Keyword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions?search=panas",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "panas"
+								}
+							]
+						},
+						"description": "Pada endpoint ini, client dapat mencari diskusi berdasarkan ***keyword*** yang dapat dicari dari ***question***, ***category***, dan, ***description***.\n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions?search=panas",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "panas"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"325-X+2+UxUYWaRvQFF6LPqSmL4M2NE\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "110b0230053789a3dbf53313c2a84170;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:47:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "805"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get questions with keyword panas\",\n    \"data\": [\n        {\n            \"_id\": \"64805207ad1b1ec16330f752\",\n            \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n            \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n            \"category\": \"Padi\",\n            \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n            \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"64805207ad1b1ec16330f752\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Question By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "x-powered-by",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"330-5lWiAJfhqULm/tPt+LqfWGAAmeQ\""
+								},
+								{
+									"key": "X-Cloud-Trace-Context",
+									"value": "84dfca8d80fadee26d3682f12650c910;o=1"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:48:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Google Frontend"
+								},
+								{
+									"key": "Content-Length",
+									"value": "816"
+								},
+								{
+									"key": "Alt-Svc",
+									"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get question with ID 64805207ad1b1ec16330f752\",\n    \"data\": {\n        \"_id\": \"64805207ad1b1ec16330f752\",\n        \"question\": \"Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas?\",\n        \"description\": \"Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman?\",\n        \"category\": \"Padi\",\n        \"picture\": \"https://storage.googleapis.com/tamara-storage/80f26875-ffe8-4279-8db7-63a368a43e81-padi.jpg\",\n        \"userId\": \"64803e12b23077260d526891\",\n        \"createdAt\": \"2023-06-07T09:46:47.748Z\",\n        \"updatedAt\": \"2023-06-07T09:46:47.748Z\",\n        \"__v\": 0,\n        \"user\": {\n            \"_id\": \"64803e12b23077260d526891\",\n            \"fullname\": \"Budi Sanjaya\",\n            \"email\": \"budisanjaya@gmail.com\",\n            \"photo\": \"\"\n        },\n        \"id\": \"64805207ad1b1ec16330f752\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "question",
+									"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas Updated?",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman Updated?",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Bunga",
+									"description": "Required",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"description": "Optional",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Request Body\n\n*   `question` as `string` ***(required)***\n*   `description` as `string` ***(required)***\n*   `category` as `string` ***(required)***\n*   `picture` as `file`, must be a valid image file, max size 1MB ***(optional)***\n    \n\n#### Headers\n\n*   `Content-Type` : `multipart/form-data`"
+					},
+					"response": [
+						{
+							"name": "Update Question",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "Bagaimana mengatasi kerusakan tanaman pada kondisi suhu udara yang sangat panas Updated?",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Saat ini, daerah Medan, Sumatera Utara memiliki suhu udara yang sangat panas dan ini sudah terjadi selama 5 hari belakangan ini, apa yang dapat dilakukan untuk dapat mengatasi keadaan tersebut pada tanaman Updated?",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "Bunga",
+											"description": "Required",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"description": "Optional",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-MRM0/6IV5hMZ/TwqNf6Fq7Anirc\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:00:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to update question\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/questions/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"questions",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/questions/[questionId]`\n*   `questionId` : `7d1d7bf6-f699-4f61-a604-52d415eba5e9`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Delete Question",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/questions/{{questionId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"questions",
+										"{{questionId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-/IdruE7rDtWg+D22RDVgaxX/vhM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:58:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to delete question\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint yang berfungsi untuk ***create, read, update dan delete*** diskusi atau pertanyaan oleh user yang login pada fitur komunitas.\n\n> ***Endpoint pada folder ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ANSWER",
+			"item": [
+				{
+					"name": "Create New Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers"
+							]
+						},
+						"description": "#### Request Body\n\n*   `description` as `string` ***(required)***\n*   `questionId` as `string`, must be a valid id ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-yPW8G5DoW19rFj/GdfY0xP07C3c\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:02:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to create new answer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Answers By Question",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers/question/{{questionId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"question",
+								"{{questionId}}"
+							]
+						},
+						"description": "#### Request Body\n\n*   `questionid` as `string`, must be a valid id ***(required)***\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"questionId\": \"{{questionId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "895"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37f-wMCFl23RCc2nIUzUlgPzDA+3eCw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:52:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get answers from question with ID: 64805207ad1b1ec16330f752\",\n    \"data\": [\n        {\n            \"_id\": \"648052a1ad1b1ec16330f75d\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"userId\": \"64803e12b23077260d526891\",\n            \"questionId\": \"64805207ad1b1ec16330f752\",\n            \"createdAt\": \"2023-06-07T09:49:21.146Z\",\n            \"updatedAt\": \"2023-06-07T09:49:21.146Z\",\n            \"__v\": 0,\n            \"user\": {\n                \"_id\": \"64803e12b23077260d526891\",\n                \"fullname\": \"Budi Sanjaya\",\n                \"email\": \"budisanjaya@gmail.com\",\n                \"photo\": \"\"\n            },\n            \"id\": \"648052a1ad1b1ec16330f75d\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Answer By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "878"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36e-ZuTgcf5nOY5f8zTGqx7FxVYWk28\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jun 2023 09:53:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to get answer with ID: 648052a1ad1b1ec16330f75d\",\n    \"data\": {\n        \"_id\": \"648052a1ad1b1ec16330f75d\",\n        \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n        \"userId\": \"64803e12b23077260d526891\",\n        \"questionId\": \"64805207ad1b1ec16330f752\",\n        \"createdAt\": \"2023-06-07T09:49:21.146Z\",\n        \"updatedAt\": \"2023-06-07T09:49:21.146Z\",\n        \"__v\": 0,\n        \"user\": {\n            \"_id\": \"64803e12b23077260d526891\",\n            \"fullname\": \"Budi Sanjaya\",\n            \"email\": \"budisanjaya@gmail.com\",\n            \"photo\": \"\"\n        },\n        \"id\": \"648052a1ad1b1ec16330f75d\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Request Body\n\n*   `description` as `string` ***(required)***\n    \n\n#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Updated\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-WkRQXkLV1N0ztu8aUurmfnvtSA4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:05:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to update answer\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/answers/{{answerId}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"answers",
+								"{{answerId}}"
+							]
+						},
+						"description": "#### Params\n\n*   `url` : `http://localhost:5000/answers/[answerId]`\n*   `answerId` : `9d576764-1827-469c-b379-d86e1d0d6a85`\n    \n\n#### Headers\n\n*   `Content-Type` : `application/json`"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/answers/{{answerId}}",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"answers",
+										"{{answerId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-5yqfkOdJkazMVmJvTJhWw9kOTkA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 May 2023 14:05:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success to delete answer\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Folder ini berisikan endpoint-endpoint untuk melakukan aktivitas CRUD (Create, Read, Update, dan Delete) pada data ***answer*** dari suatu ***question***, yang mana endpoint ini merupakan bagian dari fitur komunitas***.*** Syarat yang biasa diperlukan atau terhubung dalam menggunakan endpoint dalam folder ini ialah ***questionId*** dan ***userId.***\n\n> ***Endpoint ini tidak bisa dipakai oleh user yang belum login karena memerlukan token yang didapat bila user telah login.***",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "https://ml-api-6jw5kieabq-et.a.run.app/predict/rice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/Kuliah/Kampus Merdeka/BANGKIT/Capstone/rice_sakit.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ml-api-6jw5kieabq-et.a.run.app/predict/rice",
+					"protocol": "https",
+					"host": [
+						"ml-api-6jw5kieabq-et",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"predict",
+						"rice"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
