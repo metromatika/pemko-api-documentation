@@ -26,5 +26,5 @@
 }
 
 .Toastify__toast > button > svg {
-  display: none;
+  /* display: none; */
 }

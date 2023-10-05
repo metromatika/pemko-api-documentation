@@ -1,8 +1,9 @@
 import { useToken } from '@/store/client'
+import ENV from '@/utils/lib/environment'
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: ENV.apiUrl,
   withCredentials: true
 })
 

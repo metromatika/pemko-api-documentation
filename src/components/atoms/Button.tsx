@@ -1,7 +1,7 @@
-import { ImSpinner2 } from 'react-icons/im'
 import * as React from 'react'
 
 import clsxm from '@/utils/lib/clsxm'
+import { Loading } from '.'
 
 interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'base' | 'outline' | 'info'
@@ -25,7 +25,7 @@ export default function Button({ variant, loading, disabled, className, children
           variant === 'danger' && ['bg-red-500 text-white hover:bg-red-700 disabled:bg-red-500/70'],
           variant === 'info' && ['bg-blue-500 text-white hover:bg-blue-700 disabled:bg-blue-500/70'],
           variant === 'base' && ['bg-white hover:bg-slate-200 disabled:bg-white/70'],
-          variant === 'outline' && ['border border-slate-300 py-[7px] text-font hover:bg-slate-100 md:py-[8px]']
+          variant === 'outline' && ['border border-slate-300 py-[7px] text-font hover:bg-slate-200 md:py-[8px]']
         ],
         [
           'relative flex items-center justify-center rounded-md text-xs font-semibold md:text-sm',
@@ -38,9 +38,12 @@ export default function Button({ variant, loading, disabled, className, children
       ])}
     >
       {loading && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <ImSpinner2 className={`animate-spin ${variant === 'outline' ? 'text-font' : 'text-white'}`} />
-        </div>
+        <Loading
+          className={clsxm(
+            'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+            variant === 'outline' ? 'text-font' : 'text-white'
+          )}
+        />
       )}
       {children}
     </button>

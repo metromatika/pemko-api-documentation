@@ -92,7 +92,14 @@ export interface CollectionType {
   json_file: PostmanCollection
 }
 
+export interface CollectionPaginationType {
+  current_page: number
+  per_page: number
+  total: number
+  data: CollectionType[]
+}
+
 export interface CollectionResponseType {
   message: string
-  data: CollectionType[]
+  data: CollectionPaginationType
 }

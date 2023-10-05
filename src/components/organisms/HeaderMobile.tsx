@@ -8,12 +8,15 @@ import { useDisableBodyScroll, useOutsideClick } from '@/hooks'
 import { BgAbsolute, Icon } from '..'
 import { useCode } from '@/store/client'
 import { LanguagesVariant } from './Header'
+import clsxm from '@/utils/lib/clsxm'
 
 interface HeaderMobileProps {
   action: (value: boolean) => void
 }
 
-const LanguageData: { icon: string; label: (typeof LanguagesVariant)[number] }[] = [
+type codeType = (typeof LanguagesVariant)[number]
+
+const LanguageData: { icon: string; label: codeType }[] = [
   { icon: CurlIcon, label: 'curl' },
   { icon: JavascriptIcon, label: 'javascript' },
   { icon: PythonIcon, label: 'python' },
@@ -32,8 +35,13 @@ export default function HeaderMobile({ action }: HeaderMobileProps) {
     setCode: state.setCode
   }))
 
+  const handleUpdateCode = (label: codeType) => {
+    setCode(label)
+    setIsShow(false)
+  }
+
   return (
-    <header className="h-[80px] bg-dark xl:hidden flex items-center px-4 fixed inset-x-0 top-0 z-30">
+    <header className="h-20 bg-dark xl:hidden flex items-center px-4 fixed inset-x-0 top-0 z-30">
       <nav className="flex items-center justify-between w-full">
         <HiBars3 className="w-7 h-5 text-white" onClick={action} />
         <Link to="/" className="h-10 -mr-7">
@@ -47,6 +55,7 @@ export default function HeaderMobile({ action }: HeaderMobileProps) {
           <HiChevronDown className="text-sm" />
         </button>
       </nav>
+
       <div
         ref={ref}
         className={clsx(
@@ -57,12 +66,10 @@ export default function HeaderMobile({ action }: HeaderMobileProps) {
         {LanguageData.map((item, index) => (
           <div
             key={index}
-            onClick={() => setCode(item.label)}
-            className={clsx(
-              'flex gap-3 justify-center w-full items-center border py-4 rounded-lg cursor-pointer',
-              code === item.label.toLowerCase()
-                ? 'bg-primary border-primary text-white ring-2 ring-primary/30'
-                : 'border-font-dark/40 text-font-dark'
+            onClick={() => handleUpdateCode(item.label)}
+            className={clsxm(
+              'flex gap-3 justify-center w-full items-center border py-4 rounded-lg cursor-pointer border-font-dark/40 text-font-dark',
+              code === item.label.toLowerCase() && 'bg-primary border-primary text-white ring-2 ring-primary/30'
             )}
           >
             <img src={item.icon} alt="curl" className="h-4" />
@@ -71,7 +78,10 @@ export default function HeaderMobile({ action }: HeaderMobileProps) {
         ))}
         <Icon
           onClick={() => setIsShow(false)}
-          className="absolute top-1/2 -translate-x-1/2 left-0 w-10 h-10 bg-sideBar shadow-lg"
+          className={clsx(
+            'absolute top-1/2 -translate-x-1/2 left-0 w-10 h-10 bg-sideBar shadow-lg',
+            !isShow && 'hidden'
+          )}
         >
           <HiChevronRight />
         </Icon>
