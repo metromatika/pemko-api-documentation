@@ -7,9 +7,9 @@ export const loginFn = async (fields: LoginInput): Promise<IAuthResponse> => {
   return response.data
 }
 
-export const registerFn = async (fields: RegisterInput): Promise<IAuthResponse> => {
+export const registerFn = async (fields: RegisterInput): Promise<IUser> => {
   const response = await api.post('/auth/register', fields)
-  return response.data
+  return response.data.data
 }
 
 export const getMeFn = async (): Promise<IUser> => {
@@ -19,4 +19,14 @@ export const getMeFn = async (): Promise<IUser> => {
 
 export const logoutFn = async (): Promise<void> => {
   await api.post('/auth/logout')
+}
+
+type verifyFields = {
+  verificationCode: string
+  email: string
+}
+
+export const verifyFn = async ({ verificationCode, email }: verifyFields): Promise<IUser> => {
+  const response = await api.post('/auth/verify', { verification_code: verificationCode, email: email })
+  return response.data
 }

@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 import { AuthLayout, DashboardLayout, Dialog, ProtectedAuth, ProtectedRoute } from '@/components'
-import { Create, Dashboard, Detail, Login, Register } from '@/pages'
+import { Create, Dashboard, Detail, Login, NotFound, Register, Verify } from '@/pages'
 
 import { DialogOptions } from '@/components/organisms/Dialog'
 import { useDialog } from '@/store/client'
@@ -23,6 +23,8 @@ export default function App() {
       />
       <ToastContainer />
       <Routes>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/404" element={<NotFound />} />
         <Route path="/" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path=":collectionId" element={<Detail />} />
@@ -30,10 +32,12 @@ export default function App() {
             <Route path="create" element={<Create />} />
           </Route>
         </Route>
+
         <Route element={<ProtectedAuth />}>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="verify/:email" element={<Verify />} />
           </Route>
         </Route>
       </Routes>

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
 
 import {
@@ -20,10 +20,16 @@ export const useCreateCollection = () => {
   })
 }
 
-export const useGetCollections = (token: string, title: string) => {
-  return useQuery({
-    queryKey: ['collections', token, title],
-    queryFn: () => getCollectionsFn(title)
+export const useGetCollections = (token: string, title: string, get: 'self' | 'all') => {
+  return useInfiniteQuery({
+    queryKey: ['collections', token, title, get],
+    queryFn: ({ pageParam: page = 0 }) => getCollectionsFn(title, get, page),
+    getNextPageParam: (lastPage, pages) => {
+      if (Math.ceil(lastPage.total / 6) > pages.length) {
+        return pages.length + 1
+      }
+      return undefined
+    }
   })
 }
 
@@ -48,6 +54,7 @@ export const useUpdateCollection = () => {
   return useMutation(updateCollectionFn, {
     onSuccess: (data) => {
       queryClient.invalidateQueries(['collection', data.id])
+      queryClient.invalidateQueries('collections')
       toast.success('Collection updated!')
     }
   })

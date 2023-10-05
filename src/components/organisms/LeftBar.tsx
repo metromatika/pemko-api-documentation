@@ -1,21 +1,17 @@
-import { Link, createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { ImSpinner2 } from 'react-icons/im'
+import { Link, createSearchParams, useNavigate, useParams } from 'react-router-dom'
 import { HiXMark } from 'react-icons/hi2'
 import * as React from 'react'
 import clsx from 'clsx'
 
-import { Brand, Button, ProjectLink, SearchBar, HeaderMobile, UnAuth, Auth, BgAbsolute } from '@/components'
+import { Brand, Button, ProjectLink, SearchBar, HeaderMobile, UnAuth, Auth, BgAbsolute, Loading } from '@/components'
 import { useGetCollection, useGetCollections } from '@/store/server'
-import { useDisableBodyScroll, useOutsideClick, useSearch } from '@/hooks'
+import { useDisableBodyScroll, useOutsideClick } from '@/hooks'
 import { useToken } from '@/store/client'
 import { ItemType } from '@/utils/types'
 
 export default function LeftBar() {
-  const [searchParams] = useSearchParams()
-  const search = searchParams.get('search')
-
   const [isShow, setIsShow] = React.useState(false)
-  const [keyword, setKeyword] = useSearch(search as string)
+  const [keyword, setKeyword] = React.useState('')
 
   useDisableBodyScroll(isShow)
   const ref = useOutsideClick(() => setIsShow(false))
@@ -24,7 +20,7 @@ export default function LeftBar() {
   const { collectionId } = useParams<{ collectionId: string }>()
   const token = useToken((state) => state.token)
 
-  const { data: collections, isLoading } = useGetCollections(token, '')
+  const { data: collections, isLoading, hasNextPage, fetchNextPage, isFetching } = useGetCollections(token, '', 'all')
   const { data: collection, isLoading: isLoadingCollection } = useGetCollection(collectionId as string, !!collectionId)
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,9 +62,7 @@ export default function LeftBar() {
         <div className="flex flex-col my-5">
           <span className="text-title/60 mb-2 text-sm mx-5">Projects</span>
           {isLoading || isLoadingCollection ? (
-            <div className="flex justify-center items-center min-h-full">
-              <ImSpinner2 className="animate-spin text-2xl text-primary/50" />
-            </div>
+            <Loading className="text-primary text-2xl min-h-full" />
           ) : (
             <nav className="flex flex-col gap-2">
               {collectionId ? (
@@ -79,14 +73,32 @@ export default function LeftBar() {
                   items={collection?.json_file.item as unknown as ItemType[]}
                 />
               ) : (
-                collections?.data.map((collection) => (
-                  <ProjectLink
-                    key={collection.id}
-                    name={collection.title}
-                    path={'/' + collection.id}
-                    items={collection.json_file.item as unknown as ItemType[]}
-                  />
+                collections?.pages.map((groups, index) => (
+                  <React.Fragment key={index}>
+                    {groups.data.map((collection) => (
+                      <ProjectLink
+                        key={collection.id}
+                        name={collection.title}
+                        path={'/' + collection.id}
+                        items={collection.json_file.item as unknown as ItemType[]}
+                      />
+                    ))}
+                    {groups.data.length === 0 ? (
+                      <span className="text-title/60 text-center italic text-xs">No projects</span>
+                    ) : null}
+                  </React.Fragment>
                 ))
+              )}
+
+              {hasNextPage && !isLoading && (
+                <Button
+                  variant="outline"
+                  className="w-fit px-4 xl:text-xs mx-auto mt-2"
+                  onClick={() => fetchNextPage()}
+                  loading={isFetching}
+                >
+                  Load more
+                </Button>
               )}
             </nav>
           )}

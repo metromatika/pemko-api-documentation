@@ -1,4 +1,4 @@
-import { CollectionResponseType, CollectionType } from '@/utils/types'
+import { CollectionPaginationType, CollectionResponseType, CollectionType } from '@/utils/types'
 import api from './axiosInstance'
 
 type CreateInput = {
@@ -24,9 +24,13 @@ export const createCollectionFn = async (fields: CreateInput): Promise<Collectio
   return response.data
 }
 
-export const getCollectionsFn = async (title: string): Promise<CollectionResponseType> => {
-  const response = await api.get(`/collection?title=${title}`)
-  return response.data
+export const getCollectionsFn = async (
+  title: string,
+  get: 'self' | 'all',
+  page: number
+): Promise<CollectionPaginationType> => {
+  const response = await api.get(`/collection?title=${title}&get=${get}&page=${page}`)
+  return response.data.data
 }
 
 export const getCollectionFn = async (collectionId: string): Promise<CollectionType> => {

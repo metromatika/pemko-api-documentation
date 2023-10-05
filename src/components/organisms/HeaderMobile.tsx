@@ -71,7 +71,10 @@ export default function HeaderMobile({ action }: HeaderMobileProps) {
         ))}
         <Icon
           onClick={() => setIsShow(false)}
-          className="absolute top-1/2 -translate-x-1/2 left-0 w-10 h-10 bg-sideBar shadow-lg"
+          className={clsx(
+            'absolute top-1/2 -translate-x-1/2 left-0 w-10 h-10 bg-sideBar shadow-lg',
+            !isShow && 'hidden'
+          )}
         >
           <HiChevronRight />
         </Icon>

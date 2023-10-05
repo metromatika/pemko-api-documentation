@@ -1,14 +1,14 @@
 export interface IRole {
   id: string
   name: string
-  alias: string
+  alias: 'administrator' | 'programmer' | 'regular_user'
 }
 
 export interface IUser {
   id: string
   role_id: string
   name: string
-  username: string
+  office: string
   email: string
   role: IRole
 }

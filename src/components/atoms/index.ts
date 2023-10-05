@@ -8,5 +8,6 @@ import Grid from './Grid'
 import Icon from './Icon'
 import BgAbsolute from './BgAbsolute'
 import Back from './Back'
+import Loading from './Loading'
 
-export { Brand, MethodLabel, Markdown, Code, Section, Button, Grid, Icon, BgAbsolute, Back }
+export { Brand, MethodLabel, Markdown, Code, Section, Button, Grid, Icon, BgAbsolute, Back, Loading }

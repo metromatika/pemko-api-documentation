@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { RegisterInput, registerValidation } from '@/utils/validations'
 import { Input, Password, Button } from '@/components'
 import { useRegister } from '@/store/server'
-import { useToken } from '@/store/client'
 import { useTitle } from '@/hooks'
 
 export default function Register() {
@@ -17,16 +16,17 @@ export default function Register() {
     resolver: yupResolver(registerValidation)
   })
 
-  const storeToken = useToken((state) => state.storeToken)
   const { mutate: register, isLoading } = useRegister()
 
   const handleRegister = (values: RegisterInput) => {
-    register(values, {
-      onSuccess: (data) => {
-        storeToken(data.data.access_token)
-        navigate('/')
+    register(
+      { ...values, office: values.office.toUpperCase() },
+      {
+        onSuccess: (data) => {
+          navigate('/verify/' + data.email)
+        }
       }
-    })
+    )
   }
 
   return (
@@ -42,7 +42,7 @@ export default function Register() {
         <form className="flex flex-col gap-4 xl:gap-5" onSubmit={methods.handleSubmit(handleRegister)}>
           <div className="flex items-center gap-4 flex-col xl:flex-row">
             <Input id="name" label="Name" placeholder="John Doe" />
-            <Input id="username" label="Username" placeholder="john_doe" />
+            <Input id="office" label="Agency" placeholder="DINAS SOSIAL" />
           </div>
           <Input id="email" label="Email" placeholder="name@email.com" />
           <Password id="password" label="Password" />

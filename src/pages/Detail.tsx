@@ -1,12 +1,12 @@
 import { HiChevronUp, HiTrash, HiEye, HiEyeSlash } from 'react-icons/hi2'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ImSpinner2 } from 'react-icons/im'
+
+import { Button, Grid, Header, Markdown, Section, PostFolder, Icon, Back, Loading } from '@/components'
+import { ItemType, RequestType, ResponseType } from '@/utils/types'
+import { useTitle } from '@/hooks'
 
 import { useDeleteCollection, useGetCollection, useUpdateCollection } from '@/store/server'
-import { Button, Grid, Header, Markdown, Section, PostFolder, Icon, Back } from '@/components'
-import { ItemType, RequestType, ResponseType } from '@/utils/types'
 import { useDialog, useUserInfo } from '@/store/client'
-import { useTitle } from '@/hooks'
 
 export default function Detail() {
   const { dialog } = useDialog()
@@ -50,11 +50,7 @@ export default function Detail() {
   }
 
   if (isLoading) {
-    return (
-      <div className="xl:min-h-screen min-h-[calc(100vh-80px)] flex w-full">
-        <ImSpinner2 className="animate-spin text-primary/50 text-4xl xl:text-6xl m-auto" />
-      </div>
-    )
+    return <Loading className="xl:min-h-screen min-h-[calc(100vh-80px)] text-primary/50 text-4xl xl:text-6xl" />
   }
 
   return (
