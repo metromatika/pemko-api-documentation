@@ -1,14 +1,24 @@
+import axios from 'axios'
+
 import { LoginInput, RegisterInput } from '@/utils/validations'
 import { IAuthResponse, IUser } from '@/utils/types'
+import ENV from '@/utils/lib/environment'
 import api from './axiosInstance'
 
+const apiPublic = axios.create({
+  baseURL: ENV.apiUrl,
+  withCredentials: true
+})
+
+apiPublic.defaults.headers.post['Content-Type'] = 'application/json'
+
 export const loginFn = async (fields: LoginInput): Promise<IAuthResponse> => {
-  const response = await api.post('/auth/login', fields)
+  const response = await apiPublic.post('/auth/login', fields)
   return response.data
 }
 
 export const registerFn = async (fields: RegisterInput): Promise<IUser> => {
-  const response = await api.post('/auth/register', fields)
+  const response = await apiPublic.post('/auth/register', fields)
   return response.data.data
 }
 

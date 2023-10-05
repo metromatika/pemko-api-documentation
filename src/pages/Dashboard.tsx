@@ -37,7 +37,7 @@ export default function Dashboard() {
   } = useGetCollections(token, search || '', dropownData.alias)
 
   return (
-    <section className="flex flex-col pb-8">
+    <section className="flex flex-col">
       <div className="bg-dark p-6 xl:py-10">
         <div className="xl:w-9/12 mx-auto flex flex-col">
           <div className="flex items-start justify-between">
@@ -79,7 +79,7 @@ export default function Dashboard() {
           </React.Fragment>
         ))
       ) : (
-        <Loading className="min-h-[calc(100vh-305px)] text-primary/50 m-auto text-4xl" />
+        <Loading className="min-h-[calc(100vh-258px-80px)] xl:min-h-[calc(100vh-273px)] text-primary/50 m-auto text-3xl xl:text-4xl" />
       )}
 
       {hasNextPage && isSuccess && (
