@@ -37,10 +37,10 @@ export default function Login() {
       </div>
 
       <FormProvider {...methods}>
-        <form className="flex flex-col gap-4 xl:gap-5" onSubmit={methods.handleSubmit(handleLoginLocal)}>
+        <form className="flex flex-col gap-6 xl:gap-7" onSubmit={methods.handleSubmit(handleLoginLocal)}>
           <Input id="email" label="Email" placeholder="name@email.com" />
           <Password id="password" label="Password" />
-          <Button variant="primary" loading={isLoading}>
+          <Button variant="primary" loading={isLoading} className="mt-1">
             Login
           </Button>
         </form>

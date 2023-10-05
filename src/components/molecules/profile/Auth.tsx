@@ -27,11 +27,11 @@ export default function Auth() {
   return (
     <React.Fragment>
       <div className="flex flex-col gap-1">
-        <span className="truncate">{user?.name}</span>
-        <div className="text-xs -mt-1 font-normal text-title/50 flex items-center gap-2">
+        <span className="truncate max-w-[173px]">{user?.name}</span>
+        <div className="text-xs -mt-1 font-normal text-title/50 flex items-center gap-1">
           <span>{user?.role.name}</span>
           <span>&bull;</span>
-          <span className="truncate">{user?.office}</span>
+          <span className="truncate max-w-[96px]">{user?.office}</span>
         </div>
       </div>
       <Icon className="w-9 h-9 ml-auto bg-red-500 hover:bg-red-600 cursor-pointer" onClick={handleLogout}>
