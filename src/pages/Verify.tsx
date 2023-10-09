@@ -39,7 +39,7 @@ export default function Verify() {
       </div>
 
       <FormProvider {...methods}>
-        <form className="flex flex-col gap-4 xl:gap-5" onSubmit={methods.handleSubmit(handleVerify)}>
+        <form className="flex flex-col gap-7 xl:gap-8" onSubmit={methods.handleSubmit(handleVerify)}>
           <Input id="verification_code" label="Verfication Code" placeholder="6548de" />
           <Button variant="primary" loading={isLoading}>
             Verify

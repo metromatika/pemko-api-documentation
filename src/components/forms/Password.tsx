@@ -18,7 +18,7 @@ export default function Password({ id, label, ...rest }: PasswordProps) {
   const { errors } = formState
 
   return (
-    <div className="flex flex-col gap-1.5 xl:gap-2.5">
+    <div className="flex flex-col gap-1.5 xl:gap-2.5 relative">
       <Label htmlFor={label}>{label}</Label>
       <div className="relative">
         <input
@@ -41,7 +41,9 @@ export default function Password({ id, label, ...rest }: PasswordProps) {
           {showPassword ? <HiEyeSlash /> : <HiEye />}
         </Icon>
       </div>
-      {errors[id] && <span className="-mt-1 text-xs text-red-400 xl:text-sm">{errors[id]?.message?.toString()}</span>}
+      {errors[id] && (
+        <span className="mt-1 text-xs text-red-400 absolute top-full left-0">{errors[id]?.message?.toString()}</span>
+      )}
     </div>
   )
 }

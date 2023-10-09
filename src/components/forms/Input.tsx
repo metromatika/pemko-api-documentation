@@ -17,7 +17,7 @@ export default function Input({ id, label, leftIcon: LeftIcon, disabled, ...rest
   const { errors } = formState
 
   return (
-    <div className="flex w-full flex-col gap-1.5 xl:gap-2.5">
+    <div className="flex w-full flex-col gap-1.5 xl:gap-2.5 relative">
       {label && <Label htmlFor={id}>{label}</Label>}
       <div className="relative">
         {LeftIcon && (
@@ -37,7 +37,9 @@ export default function Input({ id, label, leftIcon: LeftIcon, disabled, ...rest
           )}
         />
       </div>
-      {errors[id] && <span className="-mt-1 text-xs text-red-400 xl:text-sm ">{errors[id]?.message?.toString()}</span>}
+      {errors[id] && (
+        <span className="mt-1 text-xs text-red-400 absolute top-full left-0">{errors[id]?.message?.toString()}</span>
+      )}
     </div>
   )
 }

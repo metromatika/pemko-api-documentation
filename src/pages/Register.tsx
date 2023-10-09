@@ -39,15 +39,15 @@ export default function Register() {
       </div>
 
       <FormProvider {...methods}>
-        <form className="flex flex-col gap-4 xl:gap-5" onSubmit={methods.handleSubmit(handleRegister)}>
-          <div className="flex items-center gap-4 flex-col xl:flex-row">
+        <form className="flex flex-col gap-6 xl:gap-7" onSubmit={methods.handleSubmit(handleRegister)}>
+          <div className="flex items-center gap-6 xl:gap-4 flex-col xl:flex-row">
             <Input id="name" label="Name" placeholder="John Doe" />
             <Input id="office" label="Agency" placeholder="DINAS SOSIAL" />
           </div>
           <Input id="email" label="Email" placeholder="name@email.com" />
           <Password id="password" label="Password" />
           <Password id="password_confirmation" label="Confirm Password" />
-          <Button variant="primary" loading={isLoading}>
+          <Button variant="primary" loading={isLoading} className="mt-1">
             Register
           </Button>
         </form>
