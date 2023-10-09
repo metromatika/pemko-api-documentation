@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -8,7 +8,9 @@ import { useVerify } from '@/store/server'
 import { useTitle } from '@/hooks'
 
 export default function Verify() {
-  const { email } = useParams<{ email: string }>()
+  const [searchParams] = useSearchParams()
+  const email = searchParams.get('email')
+  // const { email } = useParams<{ email: string }>()
   const navigate = useNavigate()
   useTitle('Email Verification')
 

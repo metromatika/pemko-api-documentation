@@ -11,7 +11,7 @@ export default function NotFound() {
       <h1 className="text-6xl font-bold text-title">404</h1>
       <h3 className="font-semibold text-font/50">Page could not be found</h3>
       <Button className="mt-8 px-4 shadow-button" variant="primary" onClick={() => navigate('/')}>
-        Kembali ke Beranda
+        Back to Home
       </Button>
     </section>
   )

@@ -21,7 +21,7 @@ export default function App() {
         onClose={handleClose}
         {...(dialogOptions as DialogOptions)}
       />
-      <ToastContainer />
+      <ToastContainer className="max-w-[70%] xl:max-w-none" />
       <Routes>
         <Route path="*" element={<NotFound />} />
         <Route path="/404" element={<NotFound />} />
@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-            <Route path="verify/:email" element={<Verify />} />
+            <Route path="verify" element={<Verify />} />
           </Route>
         </Route>
       </Routes>

@@ -1,5 +1,5 @@
 import { HiChevronUp, HiTrash, HiEye, HiEyeSlash } from 'react-icons/hi2'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { Button, Grid, Header, Markdown, Section, PostFolder, Icon, Back, Loading } from '@/components'
 import { ItemType, RequestType, ResponseType } from '@/utils/types'
@@ -14,7 +14,7 @@ export default function Detail() {
   const { collectionId } = useParams<{ collectionId: string }>()
 
   const user = useUserInfo((state) => state.user)
-  const { data: collection, isLoading } = useGetCollection(collectionId as string)
+  const { data: collection, isLoading, isSuccess } = useGetCollection(collectionId as string)
   const { mutateAsync: deleteCollection, isLoading: isLoadingDelete } = useDeleteCollection()
   const { mutateAsync: updateCollection, isLoading: isLoadingUpdate } = useUpdateCollection()
 
@@ -51,6 +51,10 @@ export default function Detail() {
 
   if (isLoading) {
     return <Loading className="xl:min-h-screen min-h-[calc(100vh-80px)] text-primary/50 text-4xl xl:text-6xl" />
+  }
+
+  if (isSuccess && collection === undefined) {
+    return <Navigate to="/404" />
   }
 
   return (

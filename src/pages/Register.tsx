@@ -23,7 +23,8 @@ export default function Register() {
       { ...values, office: values.office.toUpperCase() },
       {
         onSuccess: (data) => {
-          navigate('/verify/' + data.email)
+          navigate('/verify?email=' + data.email)
+          // navigate({pathname:'/verify', search: ``})
         }
       }
     )

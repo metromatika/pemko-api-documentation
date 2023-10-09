@@ -44,7 +44,7 @@ export const useLogout = () => {
     onSuccess: () => {
       useToken.getState().removeToken()
       toast.success('Successfully Logout!')
-      window.location.href = '/'
+      // window.location.href = '/'
     }
   })
 }
@@ -52,7 +52,7 @@ export const useLogout = () => {
 export const useVerify = () => {
   return useMutation(verifyFn, {
     onSuccess: () => {
-      toast.success('Successfully verified!')
+      toast.success('Successfully verified, Please Login!')
     }
   })
 }

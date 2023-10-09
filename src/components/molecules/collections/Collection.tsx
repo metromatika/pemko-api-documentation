@@ -18,8 +18,8 @@ export default function Collection({ collection }: CollectionProps) {
         <h3 className="text-base xl:text-lg font-semibold text-title">{collection.title}</h3>
         <span
           className={clsx(
-            'rounded-full ml-auto py-[2px] px-2 text-[10px] text-white uppercase',
-            collection.access_type === 'private' ? 'bg-primary' : 'bg-indigo-600'
+            'rounded-full ml-auto py-[2px] px-2 text-[10px] uppercase font-semibold',
+            collection.access_type === 'private' ? 'bg-emerald-200 text-primary' : 'text-indigo-600 bg-indigo-200'
           )}
         >
           {collection.access_type}
