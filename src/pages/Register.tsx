@@ -24,7 +24,6 @@ export default function Register() {
       {
         onSuccess: (data) => {
           navigate('/verify?email=' + data.email)
-          // navigate({pathname:'/verify', search: ``})
         }
       }
     )

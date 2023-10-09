@@ -10,7 +10,6 @@ import { useTitle } from '@/hooks'
 export default function Verify() {
   const [searchParams] = useSearchParams()
   const email = searchParams.get('email')
-  // const { email } = useParams<{ email: string }>()
   const navigate = useNavigate()
   useTitle('Email Verification')
 

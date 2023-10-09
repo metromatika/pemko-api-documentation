@@ -10,7 +10,6 @@ export default {
         sideBar: '#F5F7FA',
         line: '#E6E9ED',
         dark: '#202E3D',
-        // dark: '#0E0E1A',
         'font-dark': '#7F8A96'
       }
     }

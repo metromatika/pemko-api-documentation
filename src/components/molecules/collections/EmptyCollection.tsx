@@ -17,7 +17,7 @@ export default function EmptyCollection({ keyword }: EmptyCollectionProps) {
               <span className="font-bold italic">`{keyword}`</span>. Try searching with other keywords
             </span>
           ) : (
-            'There are no projects available in API Documentation at the moment, let try to create a new project now.'
+            "There are no projects available in API Documentation at the moment, let's try to create a new project now."
           )}
         </span>
       </div>
