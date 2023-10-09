@@ -12,7 +12,7 @@ export const useLogin = () => {
       toast.success('Login success!')
     },
     onError: (error: AxiosError) => {
-      console.log(error)
+      if (error) toast.error('Email or password is incorrect')
     }
   })
 }
@@ -44,7 +44,6 @@ export const useLogout = () => {
     onSuccess: () => {
       useToken.getState().removeToken()
       toast.success('Successfully Logout!')
-      // window.location.href = '/'
     }
   })
 }
