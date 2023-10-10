@@ -1,4 +1,3 @@
-
 # API Documentation Diskominfo
 
 ## Get Started
@@ -10,6 +9,10 @@ Clone the project
 ```
 
 Copy the .env.example file and rename it as .env. Make sure to configure the .env file with the necessary settings.
+
+```bash
+  VITE_API_URL=http://localhost:8000/api
+```
 
 Go to the project directory
 

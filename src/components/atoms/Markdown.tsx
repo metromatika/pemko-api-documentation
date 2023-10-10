@@ -9,6 +9,7 @@ export default function Markdown({ children }: MarkdownProps) {
     <ReactMarkdown
       className="
             prose prose-sm
+            break-words 
             text-font font-medium leading-relaxed
             max-w-none text-[15px]
             prose-headings:text-font prose-headings:font-semibold
