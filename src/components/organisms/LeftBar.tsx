@@ -1,4 +1,4 @@
-import { Link, createSearchParams, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiXMark } from 'react-icons/hi2'
 import * as React from 'react'
 import clsx from 'clsx'
@@ -20,12 +20,12 @@ export default function LeftBar() {
   const { collectionId } = useParams<{ collectionId: string }>()
   const token = useToken((state) => state.token)
 
-  const { data: collections, isLoading, hasNextPage, fetchNextPage, isFetching } = useGetCollections(token, '', 'all')
+  const { data: collections, isLoading, hasNextPage, fetchNextPage, isFetching } = useGetCollections({ token })
   const { data: collection, isLoading: isLoadingCollection } = useGetCollection(collectionId as string, !!collectionId)
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    navigate({ pathname: '/', search: `?${createSearchParams({ search: keyword })}` })
+    navigate('/?search=' + keyword)
   }
 
   return (

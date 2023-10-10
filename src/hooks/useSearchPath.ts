@@ -1,14 +1,13 @@
 import * as React from 'react'
-import { createSearchParams, useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
-export default function useSearchPath(pathname: string, keyword: string) {
-  const navigate = useNavigate()
+export default function useSearchPath(_pathname: string, keyword: string) {
+  const [searchParams, setSearchParams] = useSearchParams()
 
   React.useEffect(() => {
-    if (keyword) {
-      navigate({ pathname, search: `?${createSearchParams({ search: keyword })}` })
-    } else {
-      navigate({ pathname, search: '' })
+    if (keyword || searchParams.get('search')) {
+      searchParams.set('search', keyword)
+      setSearchParams(searchParams, { replace: false })
     }
-  }, [keyword, navigate, pathname])
+  }, [keyword, setSearchParams, searchParams])
 }

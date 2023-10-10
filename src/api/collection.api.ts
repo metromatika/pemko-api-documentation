@@ -27,9 +27,15 @@ export const createCollectionFn = async (fields: CreateInput): Promise<Collectio
 export const getCollectionsFn = async (
   title: string,
   get: 'self' | 'all',
-  page: number
+  page: number,
+  accessType?: 'public' | 'private'
 ): Promise<CollectionPaginationType> => {
-  const response = await api.get(`/collection?title=${title}&get=${get}&page=${page}`)
+  console.log({ title, get, page, accessType })
+  console.log(`/collection?title=${title}&get=${get}&page=${page}${accessType ? `&access_type=${accessType}` : ''}`)
+
+  const response = await api.get(
+    `/collection?title=${title}&get=${get}&page=${page}${accessType ? `&access_type=${accessType}` : ''}`
+  )
   return response.data.data
 }
 
