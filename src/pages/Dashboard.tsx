@@ -10,7 +10,7 @@ import { useToken, useUserInfo } from '@/store/client'
 import { useGetCollections } from '@/store/server'
 
 const data: DropdownType[] = [
-  { title: 'Public projects', alias: 'all' },
+  { title: 'All projects', alias: 'all' },
   { title: 'My Projects', alias: 'self' }
 ]
 
