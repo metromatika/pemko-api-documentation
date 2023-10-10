@@ -28,3 +28,9 @@
 .Toastify__toast > button > svg {
   /* display: none; */
 }
+
+@media (max-width: 480px) {
+  .Toastify__toast-container {
+    /* max-width: 70% !important; */
+  }
+}

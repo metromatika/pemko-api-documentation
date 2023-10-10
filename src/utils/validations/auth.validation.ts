@@ -23,7 +23,10 @@ export const loginValidation = Yup.object({
 })
 
 export const verifyValidation = Yup.object({
-  verification_code: Yup.string().required('Verification code is required')
+  verification_code: Yup.string()
+    .required('Verification code is required')
+    .max(6, 'Verification code must be 6 characters')
+    .min(6, 'Verification code must be 6 characters')
 })
 
 export type RegisterInput = Yup.InferType<typeof registerValidation>
