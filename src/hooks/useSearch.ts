@@ -6,8 +6,6 @@ export default function useSearch(query: string): [string, React.Dispatch<React.
   React.useEffect(() => {
     if (query) {
       setKeyword(query)
-    } else {
-      setKeyword('')
     }
   }, [query])
 

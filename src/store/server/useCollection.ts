@@ -20,10 +20,17 @@ export const useCreateCollection = () => {
   })
 }
 
-export const useGetCollections = (token: string, title: string, get: 'self' | 'all') => {
+interface GetCollectionsProps {
+  token: string
+  title?: string
+  get?: 'self' | 'all'
+  accessType?: 'public' | 'private'
+}
+
+export const useGetCollections = ({ token, title = '', get = 'all', accessType }: GetCollectionsProps) => {
   return useInfiniteQuery({
-    queryKey: ['collections', token, title, get],
-    queryFn: ({ pageParam: page = 0 }) => getCollectionsFn(title, get, page),
+    queryKey: ['collections', token, title, get, accessType],
+    queryFn: ({ pageParam: page = 0 }) => getCollectionsFn(title, get, page, accessType),
     getNextPageParam: (lastPage, pages) => {
       if (Math.ceil(lastPage.total / 6) > pages.length) {
         return pages.length + 1

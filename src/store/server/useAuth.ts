@@ -12,7 +12,7 @@ export const useLogin = () => {
       toast.success('Login success!')
     },
     onError: (error: AxiosError) => {
-      if (error) toast.error('Email or password is incorrect')
+      if (error.response?.status === 401) toast.error('Email or password is incorrect')
     }
   })
 }
