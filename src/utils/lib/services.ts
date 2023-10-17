@@ -7,3 +7,7 @@ export const countItemCollection = (data: ItemType[]) => {
     return total
   }, 0)
 }
+
+export const getFileName = (path: string) => {
+  return path.replace('source-code/', '')
+}

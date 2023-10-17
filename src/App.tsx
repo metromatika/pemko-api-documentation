@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
 import { AuthLayout, DashboardLayout, Dialog, ProtectedAuth, ProtectedRoute } from '@/components'
-import { Create, Dashboard, Detail, Login, NotFound, Register, Verify } from '@/pages'
+import { Create, Dashboard, Detail, Login, NotFound, Register, SourceCode, Verify } from '@/pages'
 
 import { DialogOptions } from '@/components/organisms/Dialog'
 import { useDialog } from '@/store/client'
@@ -30,6 +30,8 @@ export default function App() {
           <Route path=":collectionId" element={<Detail />} />
           <Route element={<ProtectedRoute />}>
             <Route path="create" element={<Create />} />
+            <Route path="update/:collectionId" element={<Create />} />
+            <Route path="source-code/:collectionId" element={<SourceCode />} />
           </Route>
         </Route>
 

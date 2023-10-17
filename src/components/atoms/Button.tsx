@@ -24,7 +24,7 @@ export default function Button({ variant, loading, disabled, className, children
           variant === 'success' && ['bg-green-500 text-white hover:bg-green-700 disabled:bg-green-500/70'],
           variant === 'danger' && ['bg-red-500 text-white hover:bg-red-700 disabled:bg-red-500/70'],
           variant === 'info' && ['bg-blue-500 text-white hover:bg-blue-700 disabled:bg-blue-500/70'],
-          variant === 'base' && ['bg-white hover:bg-slate-200 disabled:bg-white/70'],
+          variant === 'base' && ['bg-white hover:bg-slate-100 disabled:bg-white/70'],
           variant === 'outline' && ['border border-slate-300 py-[7px] text-font hover:bg-slate-200 md:py-[8px]']
         ],
         [
@@ -41,7 +41,7 @@ export default function Button({ variant, loading, disabled, className, children
         <Loading
           className={clsxm(
             'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-            variant === 'outline' ? 'text-font' : 'text-white'
+            variant === 'outline' || variant === 'base' ? 'text-font' : 'text-white'
           )}
         />
       )}

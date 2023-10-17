@@ -8,7 +8,6 @@ import JavaIcon from './icons/java.svg'
 
 import UploadImg from './images/cuate.png'
 import LoginBg from './images/auth-bg.jpg'
-import RegisterBg from './images/register-bg.jpg'
 
 import tamara from './data/tamara.json'
 import medantourism from './data/medantourism.json'

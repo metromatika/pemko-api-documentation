@@ -1,10 +1,18 @@
+import clsxm from '@/utils/lib/clsxm'
+
 interface EmptyCollectionProps {
   keyword: string
+  className?: string
 }
 
-export default function EmptyCollection({ keyword }: EmptyCollectionProps) {
+export default function EmptyCollection({ keyword, className }: EmptyCollectionProps) {
   return (
-    <div className="flex min-h-[calc(100vh-258px-80px)] xl:min-h-[calc(100vh-273px)] flex-col text-title justify-center items-center gap-5">
+    <div
+      className={clsxm(
+        'flex min-h-[calc(100vh-258px-80px-32px)] xl:min-h-[calc(100vh-273px-32px)] flex-col text-title justify-center items-center gap-5',
+        className
+      )}
+    >
       <span className="xl:text-5xl text-4xl w-24 h-24 xl:w-28 xl:h-28 flex justify-center items-center bg-font/20 rounded-full">
         {keyword ? '🔍' : '🚫'}
       </span>

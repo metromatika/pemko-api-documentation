@@ -87,12 +87,13 @@ export interface PostmanCollection {
 export interface CollectionType {
   id: string
   user_id: string
-  title: string
+  project_name: string
   access_type: string
   json_file: PostmanCollection
 }
 
 export interface CollectionPaginationType {
+  length: number
   current_page: number
   per_page: number
   total: number
@@ -102,4 +103,18 @@ export interface CollectionPaginationType {
 export interface CollectionResponseType {
   message: string
   data: CollectionPaginationType
+}
+
+export interface CollectionCreateField {
+  project_name: string
+  access_type: { value: string; label: string }
+  json_file: File[]
+  source_code?: File[]
+}
+
+export interface CollectionUpdateField {
+  collectionId: string
+  project_name: string
+  access_type: { value: string; label: string }
+  json_file: File[]
 }

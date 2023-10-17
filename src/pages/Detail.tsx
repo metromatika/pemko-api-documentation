@@ -1,53 +1,19 @@
-import { HiChevronUp, HiTrash, HiEye, HiEyeSlash } from 'react-icons/hi2'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
+import { HiChevronUp } from 'react-icons/hi2'
 
-import { Button, Grid, Header, Markdown, Section, PostFolder, Icon, Back, Loading } from '@/components'
+import { Grid, Header, Markdown, Section, PostFolder, Icon, Back, Loading, More, AccessType } from '@/components'
 import { ItemType, RequestType, ResponseType } from '@/utils/types'
 import { useTitle } from '@/hooks'
 
-import { useDeleteCollection, useGetCollection, useUpdateCollection } from '@/store/server'
-import { useDialog, useUserInfo } from '@/store/client'
+import { useGetCollection } from '@/store/server'
+import { useToken } from '@/store/client'
 
 export default function Detail() {
-  const { dialog } = useDialog()
-  const navigate = useNavigate()
   const { collectionId } = useParams<{ collectionId: string }>()
+  const token = useToken((state) => state.token)
 
-  const user = useUserInfo((state) => state.user)
   const { data: collection, isLoading, isSuccess } = useGetCollection(collectionId as string)
-  const { mutateAsync: deleteCollection, isLoading: isLoadingDelete } = useDeleteCollection()
-  const { mutateAsync: updateCollection, isLoading: isLoadingUpdate } = useUpdateCollection()
-
-  useTitle(collection?.title as string)
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleDelete = () => {
-    dialog({
-      title: 'Delete Documentation',
-      description: `Are you sure you want to remove the ${collection?.title} api documentation project?`,
-      variant: 'danger',
-      submitText: 'Delete'
-    }).then(async () => {
-      await deleteCollection(collection?.id as string)
-      navigate('/')
-    })
-  }
-
-  const handleUpdate = () => {
-    const accessType = collection?.access_type === 'public' ? 'private' : 'public'
-
-    dialog({
-      title: 'Update Documentation',
-      description: `Are you sure you want to change ${collection?.title} api documentation project to ${accessType}?`,
-      variant: 'info',
-      submitText: 'Update'
-    }).then(async () => {
-      await updateCollection({ access_type: accessType, collectionId: collection?.id as string })
-    })
-  }
+  useTitle(collection?.project_name as string)
 
   if (isLoading) {
     return <Loading className="xl:min-h-screen min-h-[calc(100vh-80px)] text-primary/50 text-4xl xl:text-6xl" />
@@ -57,6 +23,10 @@ export default function Detail() {
     return <Navigate to="/404" />
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <section className="flex flex-col">
       <Header />
@@ -64,21 +34,24 @@ export default function Detail() {
         <Grid column="5">
           <Section variant="left" className="border-none py-4 xl:py-0 pb-8 xl:pb-8">
             <Back />
-            <div className="flex justify-between items-center">
-              <h1 className="xl:text-4xl text-3xl font-semibold text-title">{collection?.title}</h1>
-              {user?.id === collection?.user_id && (
-                <div className="flex items-center gap-2 xl:gap-3">
-                  <Button variant="outline" isHasIcon onClick={handleUpdate} loading={isLoadingUpdate}>
-                    {collection?.access_type === 'public' ? <HiEye /> : <HiEyeSlash />}
-                    <span className="hidden xl:flex capitalize">{collection?.access_type}</span>
-                  </Button>
-                  <Button variant="danger" isHasIcon onClick={handleDelete} loading={isLoadingDelete}>
-                    <HiTrash />
-                    <span className="hidden xl:flex">Delete</span>
-                  </Button>
-                </div>
+
+            <AccessType
+              condition={collection?.access_type === 'private'}
+              className="xl:px-2 xl:py-1 w-fit xl:text-[11px] mt-5 -mb-3"
+            >
+              {collection?.access_type}
+            </AccessType>
+            <div className="flex justify-between items-center flex-row">
+              <h1 className="xl:text-4xl text-3xl font-semibold text-title">{collection?.project_name}</h1>
+              {token && (
+                <More
+                  id={collectionId as string}
+                  name={collection?.project_name as string}
+                  userId={collection?.user_id as string}
+                />
               )}
             </div>
+
             {collection?.json_file?.info?.description && <Markdown>{collection.json_file.info.description}</Markdown>}
           </Section>
           <Section variant="right" className="xl:grid hidden border-none" />

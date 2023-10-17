@@ -21,7 +21,7 @@ export default function LeftBar() {
   const token = useToken((state) => state.token)
 
   const { data: collections, isLoading, hasNextPage, fetchNextPage, isFetching } = useGetCollections({ token })
-  const { data: collection, isLoading: isLoadingCollection } = useGetCollection(collectionId as string, !!collectionId)
+  const { data: collection, isLoading: isLoadingDetail } = useGetCollection(collectionId as string, !!collectionId)
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -52,40 +52,43 @@ export default function LeftBar() {
             />
             <HiXMark className="text-2xl xl:hidden ml-4" onClick={() => setIsShow(false)} />
           </div>
-          <Link to="/create" className="flex-1" onClick={() => setIsShow(false)}>
-            <Button variant="primary" className="mt-5 text-sm xl:hidden w-full">
-              Add New Project
-            </Button>
-          </Link>
+          {token && (
+            <Link to="/create" className="flex-1" onClick={() => setIsShow(false)}>
+              <Button variant="primary" className="mt-5 text-sm xl:hidden w-full">
+                Add New Project
+              </Button>
+            </Link>
+          )}
         </section>
 
         <div className="flex flex-col my-5">
           <span className="text-title/60 mb-2 text-sm mx-5">Projects</span>
-          {isLoading || isLoadingCollection ? (
+          {isLoading || isLoadingDetail ? (
             <Loading className="text-primary text-2xl min-h-full" />
           ) : (
             <nav className="flex flex-col gap-2">
               {collectionId ? (
                 <ProjectLink
                   key={collection?.id}
-                  name={collection?.title as string}
+                  name={collection?.project_name as string}
                   path={'/' + collection?.id}
                   items={collection?.json_file.item as unknown as ItemType[]}
                 />
               ) : (
                 collections?.pages.map((groups, index) => (
                   <React.Fragment key={index}>
-                    {groups.data.map((collection) => (
-                      <ProjectLink
-                        key={collection.id}
-                        name={collection.title}
-                        path={'/' + collection.id}
-                        items={collection.json_file.item as unknown as ItemType[]}
-                      />
-                    ))}
-                    {groups.data.length === 0 ? (
+                    {groups?.length !== 0 ? (
+                      groups.data.map((collection) => (
+                        <ProjectLink
+                          key={collection.id}
+                          name={collection.project_name}
+                          path={'/' + collection.id}
+                          items={collection.json_file.item as unknown as ItemType[]}
+                        />
+                      ))
+                    ) : (
                       <span className="text-title/60 text-center italic text-xs">No projects</span>
-                    ) : null}
+                    )}
                   </React.Fragment>
                 ))
               )}

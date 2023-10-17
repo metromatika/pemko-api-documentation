@@ -1,6 +1,7 @@
 import { useToken } from '@/store/client'
 import ENV from '@/utils/lib/environment'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const api = axios.create({
   baseURL: ENV.apiUrl,
@@ -25,6 +26,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response.status === 401) {
+      toast.info('Your session has expired, login again')
       useToken.getState().removeToken()
       window.location.href = '/'
     }

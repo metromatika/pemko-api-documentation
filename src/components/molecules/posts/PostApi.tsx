@@ -124,7 +124,7 @@ export default function PostApi({ name, response, request, id }: PostApiProps) {
 
 const RoundedText = ({ children }: { children: React.ReactNode }) => {
   return (
-    <span className="px-2 py-1 border border-font-dark text-font-dark text-[10px] xl:text-xs rounded font-semibold capitalize">
+    <span className="px-2 xl:py-1 border border-font-dark text-font-dark text-[10px] xl:text-xs rounded font-semibold capitalize">
       {children}
     </span>
   )

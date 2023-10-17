@@ -1,38 +1,91 @@
-import { useNavigate } from 'react-router-dom'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as React from 'react'
 
-import { useCreateCollection } from '@/store/server'
-import { Back, Button } from '@/components'
-import { UploadImg } from '@/assets'
+import { Back, Button, DropZone, Input, Loading, Select } from '@/components'
+import { useCreateCollection, useGetCollection, useUpdateCollection } from '@/store/server'
+import { CollectionCreateField, CollectionType } from '@/utils/types'
 
 export default function Create() {
   const navigate = useNavigate()
-  const { mutateAsync: createCollection, isLoading } = useCreateCollection()
+  const { collectionId } = useParams<{ collectionId: string }>()
+  const forms = useForm<CollectionCreateField>({ mode: 'onTouched' })
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      await createCollection({ access_type: 'private', json_file: file })
-      navigate('/')
+  const { mutateAsync: createCollection, isLoading } = useCreateCollection()
+  const { data: collection, isSuccess } = useGetCollection(collectionId as string, !!collectionId)
+  const { mutateAsync: updateCollection, isLoading: isLoadingUpdate } = useUpdateCollection()
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      forms.setValue('project_name', collection.project_name)
+      forms.setValue('access_type', { value: collection.access_type, label: collection.access_type.toUpperCase() })
     }
+  }, [isSuccess, collection, forms])
+
+  const onSubmit = async (values: CollectionCreateField) => {
+    let response: CollectionType
+    if (collectionId) {
+      response = await updateCollection({ ...values, collectionId })
+    } else {
+      response = await createCollection(values)
+    }
+
+    if (response) navigate(`/${response.id}`)
+  }
+
+  if (!isSuccess && collectionId) {
+    return <Loading className="min-h-[calc(100vh-80px)] text-primary text-4xl" />
   }
 
   return (
     <section className="flex flex-col p-4 xl:p-10">
       <Back />
-      <h1 className="text-3xl font-bold uppercase text-dark hidden xl:flex mx-auto">✨ Create a new project ✨</h1>
-      <div className="flex flex-col min-h-[calc(100vh-40px-80px-26px)] xl:min-h-[calc(100vh-100px-60px)] justify-center items-center gap-5 xl:gap-8">
-        <img src={UploadImg} alt="upload illustration" className="xl:w-[300px] w-8/12" />
-        <span className="text-center w-10/12 xl:w-1/2 font-semibold text-font text-sm xl:text-base">
-          Please upload the file extension <span className="text-primary font-bold">*.json</span> or export file from
-          postman by pressing the button below
-        </span>
-        <input type="file" accept=".json" hidden name="json_file" id="json_file" onChange={(e) => handleUpload(e)} />
-        <Button variant="primary" className="p-0 xl:p-0" loading={isLoading}>
-          <label htmlFor="json_file" className="px-4 py-2 md:py-[9px] cursor-pointer">
-            Import JSON
-          </label>
-        </Button>
+      <div className="xl:w-6/12 w-full mx-auto mt-5">
+        <div className="flex flex-col xl:gap-1">
+          <h1 className="text-2xl xl:text-3xl font-bold uppercase text-dark">Create a new project</h1>
+          <span className="text-font/80 xl:text-[15px] text-xs">
+            Please fill out the entire form below to create a new project.
+          </span>
+        </div>
+        <FormProvider {...forms}>
+          <form onSubmit={forms.handleSubmit(onSubmit)} className="flex flex-col gap-6 xl:gap-7 mt-5 xl:mt-12">
+            <Input
+              id="project_name"
+              label="Project name"
+              placeholder="Project name"
+              validation={{ required: 'Project name is required' }}
+            />
+            <Select
+              id="access_type"
+              label="Access type"
+              placeholder="Select access type"
+              validation={{ required: 'Access type is required' }}
+              options={[
+                { value: 'public', label: 'PUBLIC' },
+                { value: 'private', label: 'PRIVATE' }
+              ]}
+            />
+            <DropZone
+              id="json_file"
+              label="Collection (max. 1)"
+              accept={{ 'application/json': ['.json'] }}
+              maxFiles={1}
+              validation={collectionId ? undefined : { required: 'Collection is required' }}
+              helperText="You can upload file with .postman_collection.json extension."
+            />
+            {!collectionId && (
+              <DropZone
+                id="source_code"
+                label="Source code"
+                accept={{ 'application/vnd.rar': ['.rar'], 'application/zip': ['.zip'] }}
+                helperText="You can upload file with .zip or .rar extension."
+              />
+            )}
+            <Button variant="primary" className="w-fit px-4 ml-auto mb-10" loading={isLoading || isLoadingUpdate}>
+              {collectionId ? 'Update' : 'Create'}
+            </Button>
+          </form>
+        </FormProvider>
       </div>
     </section>
   )

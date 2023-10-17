@@ -15,6 +15,8 @@ import Collections from './collections'
 import Collection from './collections/Collection'
 import EmptyCollection from './collections/EmptyCollection'
 
+import File from './sourceCode/File'
+
 export {
   ProjectLink,
   PostFolder,
@@ -27,5 +29,6 @@ export {
   UnAuth,
   Collections,
   Collection,
-  EmptyCollection
+  EmptyCollection,
+  File
 }

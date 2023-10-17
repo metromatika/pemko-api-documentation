@@ -17,7 +17,12 @@ export default function AuthLayout() {
           width="h-7 w-7"
           containerClass="static left-8 top-8 z-50 mb-[40px] gap-1 text-lg xl:absolute xl:mb-0 xl:text-xl"
         />
-        <img src={LoginBg} alt="login-bg" className="h-full w-full object-cover brightness-50" />
+        {/* <img src={LoginBg} alt="login-bg" className="h-full w-full object-cover brightness-50" /> */}
+        <img
+          src="https://source.unsplash.com/random?indonesia"
+          alt="login-bg"
+          className="h-full w-full object-cover brightness-50"
+        />
       </div>
     </section>
   )

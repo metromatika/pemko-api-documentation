@@ -5,6 +5,7 @@ import {
   createCollectionFn,
   deleteCollectionFn,
   getCollectionFn,
+  getCollectionSourceCodeFn,
   getCollectionsFn,
   updateCollectionFn
 } from '@/api/collection.api'
@@ -23,14 +24,14 @@ export const useCreateCollection = () => {
 interface GetCollectionsProps {
   token: string
   title?: string
-  get?: 'self' | 'all'
+  filter?: 'self' | 'all'
   accessType?: 'public' | 'private'
 }
 
-export const useGetCollections = ({ token, title = '', get = 'all', accessType }: GetCollectionsProps) => {
+export const useGetCollections = ({ token, title = '', filter = 'all', accessType }: GetCollectionsProps) => {
   return useInfiniteQuery({
-    queryKey: ['collections', token, title, get, accessType],
-    queryFn: ({ pageParam: page = 0 }) => getCollectionsFn(title, get, page, accessType),
+    queryKey: ['collections', token, title, filter, accessType],
+    queryFn: ({ pageParam: page = 0 }) => getCollectionsFn(title, filter, page, accessType),
     getNextPageParam: (lastPage, pages) => {
       if (Math.ceil(lastPage.total / 6) > pages.length) {
         return pages.length + 1
@@ -42,6 +43,12 @@ export const useGetCollections = ({ token, title = '', get = 'all', accessType }
 
 export const useGetCollection = (collectionId: string, enabled?: boolean) => {
   return useQuery(['collection', collectionId], () => getCollectionFn(collectionId), { enabled: enabled ?? false })
+}
+
+export const useGetCollectionSourceCode = (collectionId: string, enabled?: boolean) => {
+  return useQuery('source-code', () => getCollectionSourceCodeFn(collectionId), {
+    enabled: enabled ?? false
+  })
 }
 
 export const useDeleteCollection = () => {

@@ -40,6 +40,22 @@ export default function Login() {
         <form className="flex flex-col gap-6 xl:gap-7" onSubmit={methods.handleSubmit(handleLoginLocal)}>
           <Input id="email" label="Email" placeholder="name@email.com" />
           <Password id="password" label="Password" />
+          {/* <DropZone
+            id="source_code"
+            label="Source code (max. 10)"
+            accept={{ 'application/vnd.rar': ['.rar'], 'application/zip': ['.zip'] }}
+            maxFiles={10}
+            helperText="You can upload file with .zip or .rar extension."
+          /> */}
+          {/* <Select
+            id="access_type"
+            label="Access type"
+            options={[
+              { value: 'public', label: 'Public' },
+              { value: 'private', label: 'Private' }
+            ]}
+            placeholder="Select access type"
+          /> */}
           <Button variant="primary" loading={isLoading} className="mt-1">
             Login
           </Button>

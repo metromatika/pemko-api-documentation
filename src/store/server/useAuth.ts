@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toast } from 'react-toastify'
 import { AxiosError } from 'axios'
 
@@ -23,7 +23,7 @@ export const useRegister = () => {
       toast.success('Register success!')
       setTimeout(() => {
         toast.info('We have sent a verification code to your email')
-      }, 500)
+      }, 800)
     },
     onError: (error: AxiosError<IErrorResponse>) => {
       toast.error(error.response?.data.message)
@@ -40,9 +40,12 @@ export const useGetMe = () => {
 }
 
 export const useLogout = () => {
+  const queryClient = useQueryClient()
+
   return useMutation(logoutFn, {
     onSuccess: () => {
       useToken.getState().removeToken()
+      queryClient.invalidateQueries('user')
       toast.success('Successfully Logout!')
     }
   })

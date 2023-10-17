@@ -37,6 +37,6 @@ type verifyFields = {
 }
 
 export const verifyFn = async ({ verificationCode, email }: verifyFields): Promise<IUser> => {
-  const response = await api.post('/auth/verify', { verification_code: verificationCode, email: email })
+  const response = await api.post('/auth/verify-email', { verification_code: verificationCode, email: email })
   return response.data
 }

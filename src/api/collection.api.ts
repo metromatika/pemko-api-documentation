@@ -1,27 +1,44 @@
-import { CollectionPaginationType, CollectionResponseType, CollectionType } from '@/utils/types'
+import { CollectionCreateField, CollectionPaginationType, CollectionType, CollectionUpdateField } from '@/utils/types'
+import { SourceCodeType } from '@/utils/types/sourceCode.type'
 import api from './axiosInstance'
 
-type CreateInput = {
-  access_type: 'public' | 'private'
-  json_file: File
-}
-
-type UpdateInput = {
-  collectionId: string
-  access_type: 'public' | 'private'
-}
-
-export const createCollectionFn = async (fields: CreateInput): Promise<CollectionResponseType> => {
+export const createCollectionFn = async (fields: CollectionCreateField): Promise<CollectionType> => {
   const formdata = new FormData()
-  formdata.append('access_type', fields.access_type)
-  formdata.append('json_file', fields.json_file)
+  formdata.append('project_name', fields.project_name)
+  formdata.append('access_type', fields.access_type.value)
+  formdata.append('json_file', fields.json_file[0])
+
+  if (fields.source_code) {
+    fields.source_code.map((file) => {
+      formdata.append('source_code_file[]', file)
+    })
+  }
 
   const response = await api.post('/collection', formdata, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   })
-  return response.data
+  return response.data.data
+}
+
+export const updateCollectionFn = async (fields: CollectionUpdateField): Promise<CollectionType> => {
+  const formdata = new FormData()
+  formdata.append('project_name', fields.project_name)
+  formdata.append('access_type', fields.access_type.value)
+  formdata.append('_method', 'PUT')
+
+  if (fields.json_file) {
+    formdata.append('json_file', fields.json_file[0])
+  }
+
+  const response = await api.post(`/collection/${fields.collectionId}`, formdata, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+
+  return response.data.data
 }
 
 export const getCollectionsFn = async (
@@ -30,12 +47,12 @@ export const getCollectionsFn = async (
   page: number,
   accessType?: 'public' | 'private'
 ): Promise<CollectionPaginationType> => {
-  console.log({ title, get, page, accessType })
-  console.log(`/collection?title=${title}&get=${get}&page=${page}${accessType ? `&access_type=${accessType}` : ''}`)
-
   const response = await api.get(
-    `/collection?title=${title}&get=${get}&page=${page}${accessType ? `&access_type=${accessType}` : ''}`
+    `/collection?project_name=${title}${get === 'all' ? '' : `&get=${get}`}&page=${page}${
+      accessType ? `&access_type=${accessType}` : ''
+    }`
   )
+
   return response.data.data
 }
 
@@ -44,11 +61,11 @@ export const getCollectionFn = async (collectionId: string): Promise<CollectionT
   return response.data.data
 }
 
-export const deleteCollectionFn = async (collectionId: string) => {
-  await api.delete(`/collection/${collectionId}`)
+export const getCollectionSourceCodeFn = async (collectionId: string): Promise<SourceCodeType[]> => {
+  const response = await api.get(`/collection/${collectionId}/source-code`)
+  return response.data.data
 }
 
-export const updateCollectionFn = async ({ access_type, collectionId }: UpdateInput): Promise<CollectionType> => {
-  const response = await api.put(`/collection/${collectionId}`, { access_type })
-  return response.data.data
+export const deleteCollectionFn = async (collectionId: string) => {
+  await api.delete(`/collection/${collectionId}`)
 }
