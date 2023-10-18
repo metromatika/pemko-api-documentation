@@ -25,7 +25,6 @@ export {
   // images
   UploadImg,
   LoginBg,
-  RegisterBg,
 
   // data
   tamara,
