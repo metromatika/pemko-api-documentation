@@ -4,7 +4,7 @@ import { HiPlus } from 'react-icons/hi2'
 import * as React from 'react'
 
 import { useGetCollection, useGetCollectionSourceCode } from '@/store/server'
-import { Back, Button, DropZone, File, Loading } from '@/components'
+import { Back, Button, DropZone, EmptyCollection, File, Loading } from '@/components'
 import { useUserInfo } from '@/store/client'
 import { useCreateSourceCode } from '@/store/server/useSourceCode'
 
@@ -77,6 +77,7 @@ export default function SourceCode() {
           )}
           <div className="flex flex-col xl:gap-2 gap-1 mt-5">
             {codes?.map((code) => <File data={code} key={code.id} />)}
+            {codes?.length === 0 ? <EmptyCollection className="w-full" keyword="" type="source code" /> : null}
           </div>
         </div>
       </div>

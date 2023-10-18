@@ -7,7 +7,7 @@ import RubyIcon from './icons/ruby.svg'
 import JavaIcon from './icons/java.svg'
 
 import UploadImg from './images/cuate.png'
-import LoginBg from './images/auth-bg.jpg'
+import LoginBg from './images/auth-bg-1.jpg'
 
 import tamara from './data/tamara.json'
 import medantourism from './data/medantourism.json'

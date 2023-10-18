@@ -6,10 +6,11 @@ import { ItemType, RequestType, ResponseType } from '@/utils/types'
 import { useTitle } from '@/hooks'
 
 import { useGetCollection } from '@/store/server'
-import { useToken } from '@/store/client'
+import { useToken, useUserInfo } from '@/store/client'
 
 export default function Detail() {
   const { collectionId } = useParams<{ collectionId: string }>()
+  const user = useUserInfo((state) => state.user)
   const token = useToken((state) => state.token)
 
   const { data: collection, isLoading, isSuccess } = useGetCollection(collectionId as string)
@@ -43,7 +44,7 @@ export default function Detail() {
             </AccessType>
             <div className="flex justify-between items-center flex-row">
               <h1 className="xl:text-4xl text-3xl font-semibold text-title">{collection?.project_name}</h1>
-              {token && (
+              {token && (user?.id === collection?.user_id || user?.role.alias === 'administrator') && (
                 <More
                   id={collectionId as string}
                   name={collection?.project_name as string}
