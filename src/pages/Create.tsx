@@ -42,9 +42,11 @@ export default function Create() {
       <Back />
       <div className="xl:w-6/12 w-full mx-auto mt-5">
         <div className="flex flex-col xl:gap-1">
-          <h1 className="text-2xl xl:text-3xl font-bold uppercase text-dark">Create a new project</h1>
+          <h1 className="text-2xl xl:text-3xl font-bold uppercase text-dark">
+            {collectionId ? 'Edit' : 'Create a new'} project
+          </h1>
           <span className="text-font/80 xl:text-[15px] text-xs">
-            Please fill out the entire form below to create a new project.
+            Please fill out the entire form below to {collectionId ? 'edit the' : 'create a new'} project.
           </span>
         </div>
         <FormProvider {...forms}>
